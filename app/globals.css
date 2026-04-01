@@ -6,44 +6,49 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background-color: #FFFFFF;
-  color: #0F172A;
-  font-family: 'Inter', sans-serif;
+  background-color: #F7F4EF;
+  color: #0D0C0A;
+  font-family: 'Outfit', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
+/* ── CORMORANT OPTICAL SIZING ─────────────────── */
+.font-display {
+  font-optical-sizing: auto;
+}
+
 /* ── CARD SHADOW ─────────────────────────────── */
 .card-shadow {
-  box-shadow: 0 1px 3px rgba(15,23,42,0.06), 0 4px 16px rgba(15,23,42,0.06);
+  box-shadow: 0 1px 4px rgba(13,12,10,0.05), 0 4px 20px rgba(13,12,10,0.06);
 }
 .card-shadow-hover {
-  box-shadow: 0 4px 24px rgba(15,23,42,0.10), 0 1px 4px rgba(15,23,42,0.06);
+  box-shadow: 0 4px 28px rgba(13,12,10,0.10), 0 1px 4px rgba(13,12,10,0.05);
 }
 
 /* ── GRADIENT TEXT ───────────────────────────── */
 .text-gradient-teal {
-  background: linear-gradient(135deg, #007A6E 0%, #00C4AD 100%);
+  background: linear-gradient(135deg, #094F41 0%, #0D6B5A 50%, #147A67 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* ── TEAL UNDERLINE ACCENT ───────────────────── */
+/* ── TEAL UNDERLINE ──────────────────────────── */
 .teal-underline {
   text-decoration: underline;
-  text-decoration-color: #00C4AD;
-  text-underline-offset: 6px;
-  text-decoration-thickness: 3px;
+  text-decoration-color: #0D6B5A;
+  text-underline-offset: 8px;
+  text-decoration-thickness: 2px;
 }
 
 /* ── SCROLLBAR ───────────────────────────────── */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #F8FAFC; }
-::-webkit-scrollbar-thumb { background: #00C4AD; border-radius: 2px; }
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: #F7F4EF; }
+::-webkit-scrollbar-thumb { background: #0D6B5A; border-radius: 2px; }
 
-/* ── PREFERS-REDUCED-MOTION ─────────────────── */
+/* ── REDUCED MOTION ─────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -53,19 +58,15 @@ body {
 
 /* ── FOCUS ───────────────────────────────────── */
 :focus-visible {
-  outline: 2px solid #00C4AD;
+  outline: 2px solid #0D6B5A;
   outline-offset: 3px;
   border-radius: 3px;
 }
 
 @layer utilities {
-  .text-hero {
-    font-size: clamp(52px, 7vw, 96px);
-    line-height: 0.95;
-  }
-  .text-cta-hl {
-    font-size: clamp(40px, 5.5vw, 80px);
-    line-height: 0.95;
-  }
   .section-pad { padding-top: 6rem; padding-bottom: 6rem; }
+  .text-hero {
+    font-size: clamp(56px, 7.5vw, 108px);
+    line-height: 0.95;
+  }
 }

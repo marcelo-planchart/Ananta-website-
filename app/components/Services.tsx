@@ -5,12 +5,12 @@ import { motion, useInView } from "framer-motion";
 import { ScanSearch, FileText, Stamp, Package, LayoutDashboard, GitBranch } from "lucide-react";
 
 const services = [
-  { title: "AI Takeoff Engine",      desc: "Vision AI extracts every glass panel, frame spec, and dimension from your architectural drawings in minutes.",          tag: "Live",         tagClass: "text-teal-dark bg-teal-bg border-teal/30",       Icon: ScanSearch,      featured: false },
-  { title: "Shop Drawings",          desc: "Expert-reviewed, AI-assisted shop drawings by our licensed drafting team. Faster than outsourced. More accurate.",       tag: "Core Service", tagClass: "text-ink-dim bg-canvas3 border-stroke",          Icon: FileText,        featured: false },
-  { title: "Engineering Stamps",     desc: "California-licensed engineering stamps on every project. The legal certification your GC requires.",                     tag: "Exclusive",    tagClass: "text-teal-dark bg-teal-bg border-teal/30",       Icon: Stamp,           featured: true  },
-  { title: "Submittal Packages",     desc: "Automated assembly from our manufacturer database — product data, installation instructions, and color cards compiled.", tag: "Coming Soon",  tagClass: "text-ink-dim bg-canvas3 border-stroke",          Icon: Package,         featured: false },
-  { title: "Client Portal",          desc: "Payment-gated document delivery. Every drawing, revision, and stamp in one secure portal.",                              tag: "Beta",         tagClass: "text-ink-dim bg-canvas3 border-stroke",          Icon: LayoutDashboard, featured: false },
-  { title: "Project Management",     desc: "Full pipeline from quote to field — CRM, workload tracking, and team communication in one place.",                       tag: "Beta",         tagClass: "text-ink-dim bg-canvas3 border-stroke",          Icon: GitBranch,       featured: false },
+  { num: "01", title: "AI Takeoff Engine",    desc: "Vision AI extracts every glass panel, frame spec, and dimension from your architectural drawings in minutes.", tag: "Live",         Icon: ScanSearch },
+  { num: "02", title: "Shop Drawings",        desc: "Expert-reviewed, AI-assisted shop drawings by our licensed drafting team. Faster and more accurate.",          tag: "Core Service", Icon: FileText },
+  { num: "03", title: "Engineering Stamps",   desc: "California-licensed engineering stamps on every project — the legal certification your GC requires.",           tag: "Exclusive",    Icon: Stamp },
+  { num: "04", title: "Submittal Packages",   desc: "Automated assembly from our manufacturer database — product data, installation instructions, color cards.",     tag: "Coming Soon",  Icon: Package },
+  { num: "05", title: "Client Portal",        desc: "Payment-gated document delivery. Every drawing, revision, and stamp in one secure portal.",                    tag: "Beta",         Icon: LayoutDashboard },
+  { num: "06", title: "Project Management",   desc: "Full pipeline from quote to field — CRM, workload tracking, and team communication in one place.",              tag: "Beta",         Icon: GitBranch },
 ];
 
 export default function Services() {
@@ -18,55 +18,50 @@ export default function Services() {
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section id="services" ref={ref} className="section-pad bg-canvas2">
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Header */}
+    <section id="services" ref={ref} className="section-pad bg-canvas">
+      <div className="max-w-6xl mx-auto px-8">
         <motion.div
-          initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }} className="mb-16"
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7 }}
+          className="mb-16 max-w-2xl"
         >
-          <p className="font-mono text-teal-dark text-[11px] tracking-[4px] uppercase mb-3 font-[500]">// OUR SERVICES</p>
-          <h2 className="font-bebas text-[clamp(40px,5vw,72px)] text-ink leading-[0.95] mb-4">
-            Everything Your Glass Business Needs.<br />
-            <span className="text-gradient-teal">In One Platform.</span>
+          <p className="font-mono text-teal text-[11px] tracking-[4px] uppercase mb-4">Our Services</p>
+          <h2 className="font-display font-semibold text-[clamp(40px,4.5vw,68px)] text-ink leading-[1.0] mb-4">
+            Everything Your Glass Business{" "}
+            <em className="italic text-gradient-teal">Needs</em>
           </h2>
-          <p className="font-sans font-[300] text-ink-dim text-[17px] max-w-[500px]">
-            Built by glazing industry insiders. AI trained on 13 years of real projects.
+          <p className="font-sans font-[300] text-ink-dim text-[17px] leading-relaxed">
+            Built by glazing insiders. Trained on 13 years of real projects.
           </p>
         </motion.div>
 
-        {/* Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div>
           {services.map((s, i) => (
-            <motion.div key={s.title}
-              initial={{ opacity: 0, y: 32 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22,1,0.36,1] }}
-              whileHover={{ y: -4 }}
-              className={`bg-canvas rounded-2xl p-7 border transition-all duration-300 cursor-default group ${
-                s.featured
-                  ? "border-teal shadow-[0_0_0_1px_rgba(0,196,173,0.3),0_8px_32px_rgba(0,196,173,0.12)]"
-                  : "border-stroke card-shadow hover:border-teal/40 hover:card-shadow-hover"
-              }`}
+            <motion.div
+              key={s.title}
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+              className="group flex items-start gap-8 py-8 border-b border-stroke cursor-default hover:bg-canvas2/60 -mx-4 px-4 rounded-xl transition-colors duration-300"
             >
-              {/* Icon */}
-              <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-5 transition-all duration-200 ${
-                s.featured ? "bg-teal text-white" : "bg-canvas2 text-teal group-hover:bg-teal-bg"
-              }`}>
-                <s.Icon className="w-5 h-5" strokeWidth={1.5} />
-              </div>
-
-              {/* Tag */}
-              <span className={`inline-block font-mono text-[10px] tracking-[2px] uppercase border px-2.5 py-[3px] rounded-full mb-4 ${s.tagClass}`}>
-                {s.tag}
+              <span className="font-display font-light text-[clamp(32px,3.5vw,48px)] text-ink/15 leading-none w-[3.5ch] shrink-0 group-hover:text-teal/30 transition-colors duration-300 pt-0.5">
+                {s.num}
               </span>
-
-              {/* Title */}
-              <h3 className={`font-sans font-[600] text-[16px] mb-3 ${s.featured ? "text-teal-dark" : "text-ink group-hover:text-teal-dark"} transition-colors`}>
-                {s.title}
-              </h3>
-
-              {/* Desc */}
-              <p className="font-sans font-[300] text-ink-dim text-[14px] leading-[1.7]">{s.desc}</p>
+              <div className="flex-1 min-w-0 pt-0.5">
+                <div className="flex items-start justify-between gap-4 mb-2">
+                  <h3 className="font-sans font-[500] text-[clamp(16px,1.5vw,19px)] text-ink group-hover:text-teal transition-colors duration-200 leading-snug">
+                    {s.title}
+                  </h3>
+                  <span className="shrink-0 font-mono text-[10px] tracking-[2px] uppercase text-ink-dim bg-canvas2 border border-stroke px-2.5 py-1 rounded-full mt-0.5">
+                    {s.tag}
+                  </span>
+                </div>
+                <p className="font-sans font-[300] text-ink-dim text-[15px] leading-[1.7] max-w-xl">{s.desc}</p>
+              </div>
+              <div className="shrink-0 w-10 h-10 rounded-xl bg-canvas2 border border-stroke flex items-center justify-center text-ink-dim group-hover:bg-teal-bg group-hover:border-teal/30 group-hover:text-teal transition-all duration-300 mt-0.5">
+                <s.Icon className="w-4 h-4" strokeWidth={1.5} />
+              </div>
             </motion.div>
           ))}
         </div>

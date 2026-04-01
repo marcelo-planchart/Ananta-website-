@@ -9,32 +9,31 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Light mode surfaces
-        canvas:   "#FFFFFF",
-        canvas2:  "#F8FAFC",
-        canvas3:  "#F1F5F9",
+        // Warm parchment surfaces
+        canvas:   "#F7F4EF",
+        canvas2:  "#EDEAD3",
+        canvas3:  "#E1DCD2",
         // Text
-        ink:      "#0F172A",
-        "ink-dim":"#64748B",
-        // Teal scale (kept from brand)
-        teal:     "#00C4AD",   // AA-contrast on white for large text/buttons
-        "teal-dark": "#007A6E", // AA-contrast for small text on white
-        "teal-dim":  "#009688",
-        "teal-bg":   "#E6FBF9", // very light teal for card tints
-        // Borders
-        stroke:   "rgba(15,23,42,0.08)",
-        "stroke-strong": "rgba(15,23,42,0.14)",
+        ink:      "#0D0C0A",
+        "ink-dim":"#7A776E",
+        // Deep forest teal — sophisticated, AA-contrast on cream
+        teal:        "#0D6B5A",
+        "teal-dark": "#094F41",
+        "teal-dim":  "#147A67",
+        "teal-bg":   "#EAF2EF",
+        // Warm borders
+        stroke:        "rgba(13,12,10,0.09)",
+        "stroke-strong":"rgba(13,12,10,0.16)",
       },
       fontFamily: {
-        bebas: ["'Bebas Neue'", "sans-serif"],
-        sans:  ["'Inter'", "sans-serif"],
-        mono:  ["'DM Mono'", "monospace"],
+        display: ["'Cormorant Garamond'", "serif"],
+        sans:    ["'Outfit'", "sans-serif"],
+        mono:    ["'DM Mono'", "monospace"],
       },
       animation: {
-        marquee:      "marquee 30s linear infinite",
+        marquee:      "marquee 36s linear infinite",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
-        "spin-slow":  "spin 20s linear infinite",
-        "float":      "float 6s ease-in-out infinite",
+        float:        "float 6s ease-in-out infinite",
       },
       keyframes: {
         marquee: {

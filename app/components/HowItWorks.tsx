@@ -35,7 +35,7 @@ export default function HowItWorks() {
           transition={{ duration: 0.7 }} className="mb-16"
         >
           <p className="font-mono text-teal-dark text-[11px] tracking-[4px] uppercase mb-3 font-[500]">// HOW IT WORKS</p>
-          <h2 className="font-bebas text-[clamp(40px,5vw,72px)] text-ink leading-[0.95] mb-4">
+          <h2 className="font-display text-[clamp(40px,5vw,72px)] text-ink leading-[0.95] mb-4">
             Blueprint to Stamp in <span className="text-gradient-teal">6 Steps</span>
           </h2>
           <p className="font-sans font-[300] text-ink-dim text-[17px]">Upload your drawings. We handle everything else.</p>
