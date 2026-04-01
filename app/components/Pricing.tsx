@@ -157,7 +157,7 @@ export default function Pricing() {
               {/* CTA */}
               <a
                 href="#cta"
-                className={`block text-center font-dm text-sm tracking-wider py-3 px-6 rounded-sm ${plan.ctaStyle}`}
+                className={`block text-center font-dm text-sm tracking-wider py-3 px-6 rounded-sm cursor-pointer ${plan.ctaStyle}`}
               >
                 {plan.cta}
               </a>

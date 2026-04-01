@@ -156,8 +156,9 @@ export default function Testimonials() {
                 <button
                   key={i}
                   onClick={() => setCurrent(i)}
-                  className={`h-1 rounded-full transition-all duration-300 ${
-                    i === current ? "w-8 bg-teal" : "w-4 bg-[rgba(0,229,200,0.20)]"
+                  aria-label={`Go to testimonial ${i + 1}`}
+                  className={`h-1 rounded-full transition-all duration-300 cursor-pointer ${
+                    i === current ? "w-8 bg-teal" : "w-4 bg-[rgba(0,229,200,0.20)] hover:bg-[rgba(0,229,200,0.40)]"
                   }`}
                 />
               ))}

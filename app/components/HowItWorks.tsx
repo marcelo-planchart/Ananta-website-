@@ -2,13 +2,14 @@
 
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
+import { Upload, ScanSearch, ShieldCheck, FileCheck, PenTool, Award } from "lucide-react";
 
 interface Step {
   num: string;
   title: string;
   body: string;
   badge?: string;
-  icon: string;
+  Icon: React.ElementType;
   status: string;
   metric: string;
 }
@@ -18,7 +19,7 @@ const steps: Step[] = [
     num: "01",
     title: "Upload Your Architectural Drawings",
     body: "Send us your project plans in any format — PDF, DWG, or scanned drawings. Our system accepts everything.",
-    icon: "↑",
+    Icon: Upload,
     status: "Upload Complete",
     metric: "Any Format Accepted",
   },
@@ -26,7 +27,7 @@ const steps: Step[] = [
     num: "02",
     title: "AI Reads Your Blueprint",
     body: "Our vision-language model identifies every glass panel, frame type, hardware spec, and dimension automatically. No manual counting.",
-    icon: "⬡",
+    Icon: ScanSearch,
     status: "AI Processing",
     metric: "~3 min avg",
   },
@@ -35,7 +36,7 @@ const steps: Step[] = [
     title: "Expert Review Gate",
     body: "A senior glazing specialist reviews and corrects every AI output before it reaches you. This is where our 13 years of domain expertise lives — and where your data becomes our proprietary training moat.",
     badge: "Proprietary Data Flywheel",
-    icon: "✓",
+    Icon: ShieldCheck,
     status: "Human Gate Active",
     metric: "100% Reviewed",
   },
@@ -43,7 +44,7 @@ const steps: Step[] = [
     num: "04",
     title: "Quote & Approval",
     body: "Validated takeoff data flows into our quoting engine. You review, approve, and authorize — all inside your client portal. No email chains.",
-    icon: "◈",
+    Icon: FileCheck,
     status: "Quote Ready",
     metric: "Client Portal",
   },
@@ -51,7 +52,7 @@ const steps: Step[] = [
     num: "05",
     title: "Shop Drawings Delivered",
     body: "AI-assisted shop drawings produced by our expert drafters, reviewed for accuracy, and delivered through your payment-gated portal.",
-    icon: "▦",
+    Icon: PenTool,
     status: "Drawings Ready",
     metric: "24–48 hr turnaround",
   },
@@ -59,7 +60,7 @@ const steps: Step[] = [
     num: "06",
     title: "Licensed Engineering Stamp",
     body: "Every final drawing receives a California-licensed engineering stamp — the legal certification your project requires. Delivered. Certified. Done.",
-    icon: "◉",
+    Icon: Award,
     status: "Stamped & Certified",
     metric: "CA Licensed",
   },
@@ -105,8 +106,12 @@ export default function HowItWorks() {
               return (
                 <div
                   key={step.num}
-                  className={`border-b border-[rgba(0,229,200,0.10)] cursor-pointer group`}
+                  className="border-b border-[rgba(0,229,200,0.10)] cursor-pointer group"
                   onClick={() => setActiveStep(i)}
+                  role="button"
+                  tabIndex={0}
+                  aria-expanded={isOpen}
+                  onKeyDown={(e) => e.key === "Enter" && setActiveStep(i)}
                 >
                   <div className="flex items-start gap-5 py-5">
                     {/* Number circle */}
@@ -123,7 +128,7 @@ export default function HowItWorks() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between">
                         <h3
-                          className={`font-dm font-[500] text-[16px] transition-colors duration-300 ${
+                          className={`font-dm font-[500] text-[16px] transition-colors duration-200 ${
                             isOpen ? "text-white-off" : "text-white-dim group-hover:text-white-off"
                           }`}
                         >
@@ -133,6 +138,7 @@ export default function HowItWorks() {
                           className={`ml-4 text-teal text-[14px] transition-transform duration-300 ${
                             isOpen ? "rotate-90" : ""
                           }`}
+                          aria-hidden="true"
                         >
                           ›
                         </span>
@@ -145,7 +151,7 @@ export default function HowItWorks() {
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: "auto", opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
                             className="overflow-hidden"
                           >
                             <p className="font-dm font-[300] text-white-dim text-[15px] leading-relaxed mt-3 pr-4">
@@ -189,7 +195,7 @@ export default function HowItWorks() {
 
                 {/* Icon */}
                 <div className="w-16 h-16 rounded-xl border border-[rgba(0,229,200,0.25)] flex items-center justify-center mb-6">
-                  <span className="text-teal text-2xl">{current.icon}</span>
+                  <current.Icon className="w-7 h-7 text-teal" strokeWidth={1.5} />
                 </div>
 
                 {/* Title */}
@@ -211,8 +217,9 @@ export default function HowItWorks() {
                     <button
                       key={i}
                       onClick={() => setActiveStep(i)}
-                      className={`h-1 rounded-full transition-all duration-300 ${
-                        i === activeStep ? "w-8 bg-teal" : "w-4 bg-[rgba(0,229,200,0.20)]"
+                      aria-label={`Go to step ${i + 1}`}
+                      className={`h-1 rounded-full transition-all duration-300 cursor-pointer ${
+                        i === activeStep ? "w-8 bg-teal" : "w-4 bg-[rgba(0,229,200,0.20)] hover:bg-[rgba(0,229,200,0.40)]"
                       }`}
                     />
                   ))}

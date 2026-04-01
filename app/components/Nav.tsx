@@ -99,8 +99,9 @@ export default function Nav() {
           {/* Hamburger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden flex flex-col gap-[5px] p-2"
-            aria-label="Toggle menu"
+            className="md:hidden flex flex-col gap-[5px] p-2 cursor-pointer"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
           >
             <span className={`block w-6 h-[2px] bg-white-off transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[7px]" : ""}`} />
             <span className={`block w-6 h-[2px] bg-white-off transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />

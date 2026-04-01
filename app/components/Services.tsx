@@ -2,13 +2,21 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import {
+  ScanSearch,
+  FileText,
+  Stamp,
+  Package,
+  LayoutDashboard,
+  GitBranch,
+} from "lucide-react";
 
 interface Service {
   title: string;
   desc: string;
   tag: string;
   tagColor: string;
-  icon: string;
+  Icon: React.ElementType;
   featured?: boolean;
 }
 
@@ -18,21 +26,21 @@ const services: Service[] = [
     desc: "Vision AI reads your architectural drawings and extracts every glass panel, frame spec, and hardware dimension. Blueprint to quantities in minutes.",
     tag: "Live",
     tagColor: "text-teal bg-[rgba(0,229,200,0.10)] border-[rgba(0,229,200,0.25)]",
-    icon: "⬡",
+    Icon: ScanSearch,
   },
   {
     title: "SHOP DRAWINGS",
     desc: "Expert-reviewed, AI-assisted shop drawings produced by our licensed drafting team. Faster than any outsourced service. More accurate than DIY.",
     tag: "Core Service",
     tagColor: "text-white-dim bg-[rgba(255,255,255,0.05)] border-[rgba(255,255,255,0.10)]",
-    icon: "▦",
+    Icon: FileText,
   },
   {
     title: "ENGINEERING STAMPS",
     desc: "California-licensed engineering stamps on every project. The legal certification your GC requires — and the chokepoint no competitor owns.",
     tag: "Exclusive",
     tagColor: "text-teal bg-[rgba(0,229,200,0.10)] border-[rgba(0,229,200,0.25)]",
-    icon: "◉",
+    Icon: Stamp,
     featured: true,
   },
   {
@@ -40,21 +48,21 @@ const services: Service[] = [
     desc: "Automated submittal assembly from our manufacturer database. Product data, installation instructions, color cards — compiled instantly. No hunting.",
     tag: "Coming Soon",
     tagColor: "text-white-dim bg-[rgba(255,255,255,0.05)] border-[rgba(255,255,255,0.10)]",
-    icon: "◈",
+    Icon: Package,
   },
   {
     title: "CLIENT PORTAL",
     desc: "Payment-gated document delivery. Every drawing, revision, and stamp delivered through your secure portal. No Dropbox. No email threads.",
     tag: "Beta",
     tagColor: "text-white-dim bg-[rgba(255,255,255,0.05)] border-[rgba(255,255,255,0.10)]",
-    icon: "⊞",
+    Icon: LayoutDashboard,
   },
   {
     title: "PROJECT MANAGEMENT",
     desc: "Full project pipeline from quote to field. CRM, workload tracking, field communication, and team management — all in one place.",
     tag: "Beta",
     tagColor: "text-white-dim bg-[rgba(255,255,255,0.05)] border-[rgba(255,255,255,0.10)]",
-    icon: "⇌",
+    Icon: GitBranch,
   },
 ];
 
@@ -106,8 +114,8 @@ export default function Services() {
               )}
 
               {/* Icon */}
-              <div className="w-12 h-12 rounded-lg border border-[rgba(0,229,200,0.20)] flex items-center justify-center mb-5 group-hover:border-teal transition-colors">
-                <span className="text-teal text-xl">{s.icon}</span>
+              <div className="w-12 h-12 rounded-lg border border-[rgba(0,229,200,0.20)] flex items-center justify-center mb-5 group-hover:border-teal transition-colors duration-200">
+                <s.Icon className="w-5 h-5 text-teal" strokeWidth={1.5} />
               </div>
 
               {/* Tag */}
