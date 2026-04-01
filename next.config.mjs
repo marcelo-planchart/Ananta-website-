@@ -1,8 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // For Firebase static export, uncomment below:
-  // output: 'export',
-  // trailingSlash: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "elitedraftingdesign.com",
+        pathname: "/img/**",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

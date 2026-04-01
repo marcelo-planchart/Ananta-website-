@@ -9,32 +9,45 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        navy: "#050D1A",
-        navy2: "#0A1628",
-        navy3: "#0F1E35",
-        teal: "#00E5C8",
-        "teal-dim": "#00B39E",
-        "white-off": "#F0F4F8",
-        "white-dim": "#8FA3B1",
+        // Light mode surfaces
+        canvas:   "#FFFFFF",
+        canvas2:  "#F8FAFC",
+        canvas3:  "#F1F5F9",
+        // Text
+        ink:      "#0F172A",
+        "ink-dim":"#64748B",
+        // Teal scale (kept from brand)
+        teal:     "#00C4AD",   // AA-contrast on white for large text/buttons
+        "teal-dark": "#007A6E", // AA-contrast for small text on white
+        "teal-dim":  "#009688",
+        "teal-bg":   "#E6FBF9", // very light teal for card tints
+        // Borders
+        stroke:   "rgba(15,23,42,0.08)",
+        "stroke-strong": "rgba(15,23,42,0.14)",
       },
       fontFamily: {
         bebas: ["'Bebas Neue'", "sans-serif"],
-        dm: ["'DM Sans'", "sans-serif"],
-        mono: ["'DM Mono'", "monospace"],
+        sans:  ["'Inter'", "sans-serif"],
+        mono:  ["'DM Mono'", "monospace"],
       },
       animation: {
-        marquee: "marquee 30s linear infinite",
+        marquee:      "marquee 30s linear infinite",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
-        "spin-slow": "spin 20s linear infinite",
+        "spin-slow":  "spin 20s linear infinite",
+        "float":      "float 6s ease-in-out infinite",
       },
       keyframes: {
         marquee: {
-          "0%": { transform: "translateX(0%)" },
+          "0%":   { transform: "translateX(0%)" },
           "100%": { transform: "translateX(-50%)" },
         },
         "pulse-glow": {
           "0%, 100%": { transform: "scale(1)", opacity: "1" },
-          "50%": { transform: "scale(1.3)", opacity: "0.6" },
+          "50%":      { transform: "scale(1.4)", opacity: "0.5" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%":      { transform: "translateY(-12px)" },
         },
       },
     },
