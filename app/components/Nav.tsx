@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import Image from "next/image";
 
 const links = [
   { label: "Services",     href: "#services" },
@@ -57,13 +56,6 @@ export default function Nav() {
         <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 group">
-            <Image
-              src="https://elitedraftingdesign.com/img/Logo-black.png"
-              alt="Elite Drafting Logo"
-              width={32}
-              height={32}
-              className="object-contain"
-            />
             <span className="font-bebas text-[20px] tracking-widest text-ink group-hover:text-teal-dark transition-colors">
               ANANTA<span className="text-teal">.</span>
             </span>
