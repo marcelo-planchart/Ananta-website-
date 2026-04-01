@@ -12,6 +12,7 @@ interface Step {
   Icon: React.ElementType;
   status: string;
   metric: string;
+  color: string;
 }
 
 const steps: Step[] = [
@@ -22,6 +23,7 @@ const steps: Step[] = [
     Icon: Upload,
     status: "Upload Complete",
     metric: "Any Format Accepted",
+    color: "rgba(0,229,200,0.8)",
   },
   {
     num: "02",
@@ -30,6 +32,7 @@ const steps: Step[] = [
     Icon: ScanSearch,
     status: "AI Processing",
     metric: "~3 min avg",
+    color: "rgba(0,229,200,0.8)",
   },
   {
     num: "03",
@@ -39,6 +42,7 @@ const steps: Step[] = [
     Icon: ShieldCheck,
     status: "Human Gate Active",
     metric: "100% Reviewed",
+    color: "rgba(0,229,200,1)",
   },
   {
     num: "04",
@@ -47,6 +51,7 @@ const steps: Step[] = [
     Icon: FileCheck,
     status: "Quote Ready",
     metric: "Client Portal",
+    color: "rgba(0,229,200,0.8)",
   },
   {
     num: "05",
@@ -55,6 +60,7 @@ const steps: Step[] = [
     Icon: PenTool,
     status: "Drawings Ready",
     metric: "24–48 hr turnaround",
+    color: "rgba(0,229,200,0.8)",
   },
   {
     num: "06",
@@ -63,6 +69,7 @@ const steps: Step[] = [
     Icon: Award,
     status: "Stamped & Certified",
     metric: "CA Licensed",
+    color: "rgba(0,229,200,0.8)",
   },
 ];
 
@@ -70,156 +77,180 @@ export default function HowItWorks() {
   const [activeStep, setActiveStep] = useState(0);
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
-
   const current = steps[activeStep];
 
   return (
-    <section
-      id="how-it-works"
-      ref={ref}
-      className="py-24 bg-navy"
-    >
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="how-it-works" ref={ref} className="section-pad bg-navy2 relative overflow-hidden">
+      {/* Background orb */}
+      <div className="absolute right-0 top-0 w-[600px] h-[600px] pointer-events-none opacity-30"
+        style={{ background: "radial-gradient(circle at 100% 0%, rgba(0,229,200,0.08) 0%, transparent 60%)" }}
+      />
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 28 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="mb-16"
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-20"
         >
-          <p className="font-mono text-teal text-[11px] tracking-[4px] uppercase mb-4">
-            // HOW IT WORKS
-          </p>
-          <h2 className="font-bebas text-[clamp(40px,5vw,72px)] text-white-off leading-tight mb-4">
-            From Blueprint to Stamp in 6 Steps
+          <div className="flex items-center gap-3 mb-5">
+            <div className="h-[1px] w-8 bg-teal" />
+            <p className="font-mono text-teal text-[11px] tracking-[4px] uppercase">How It Works</p>
+          </div>
+          <h2 className="font-bebas text-[clamp(44px,5.5vw,80px)] leading-[0.95] text-white-off mb-5">
+            From Blueprint to Stamp
+            <br />
+            <span className="text-gradient-teal">in 6 Steps</span>
           </h2>
           <p className="font-dm font-[300] text-white-dim text-[18px]">
             Upload your drawings. We handle everything else.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-[1fr_440px] gap-12 items-start">
-          {/* Left: Accordion */}
-          <div className="space-y-0">
+        <div className="grid lg:grid-cols-[1fr_480px] gap-16 items-start">
+          {/* Left: Steps */}
+          <div>
             {steps.map((step, i) => {
               const isOpen = activeStep === i;
               return (
-                <div
+                <motion.div
                   key={step.num}
-                  className="border-b border-[rgba(0,229,200,0.10)] cursor-pointer group"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ duration: 0.6, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                  className="border-b border-[rgba(0,229,200,0.07)] cursor-pointer group"
                   onClick={() => setActiveStep(i)}
                   role="button"
                   tabIndex={0}
                   aria-expanded={isOpen}
                   onKeyDown={(e) => e.key === "Enter" && setActiveStep(i)}
                 >
-                  <div className="flex items-start gap-5 py-5">
-                    {/* Number circle */}
-                    <div
-                      className={`shrink-0 w-9 h-9 rounded-full flex items-center justify-center font-mono text-[11px] tracking-wider transition-all duration-300 ${
-                        isOpen
-                          ? "bg-teal text-navy"
-                          : "border border-[rgba(0,229,200,0.25)] text-white-dim group-hover:border-teal group-hover:text-teal"
-                      }`}
-                    >
+                  <div className="flex items-start gap-5 py-6">
+                    {/* Number */}
+                    <div className={`shrink-0 w-9 h-9 rounded-full flex items-center justify-center font-mono text-[11px] transition-all duration-400 ${
+                      isOpen
+                        ? "bg-teal text-navy shadow-[0_0_20px_rgba(0,229,200,0.5)]"
+                        : "border border-[rgba(0,229,200,0.20)] text-white-dim group-hover:border-teal group-hover:text-teal"
+                    }`}>
                       {step.num}
                     </div>
 
-                    <div className="flex-1 min-w-0">
+                    <div className="flex-1 min-w-0 pb-1">
                       <div className="flex items-center justify-between">
-                        <h3
-                          className={`font-dm font-[500] text-[16px] transition-colors duration-200 ${
-                            isOpen ? "text-white-off" : "text-white-dim group-hover:text-white-off"
-                          }`}
-                        >
+                        <h3 className={`font-dm font-[500] text-[16px] transition-colors duration-200 leading-snug ${
+                          isOpen ? "text-white-off" : "text-white-dim group-hover:text-white-off"
+                        }`}>
                           {step.title}
                         </h3>
-                        <span
-                          className={`ml-4 text-teal text-[14px] transition-transform duration-300 ${
-                            isOpen ? "rotate-90" : ""
-                          }`}
-                          aria-hidden="true"
+                        <motion.span
+                          animate={{ rotate: isOpen ? 90 : 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="ml-4 text-teal text-[16px] shrink-0"
+                          aria-hidden
                         >
                           ›
-                        </span>
+                        </motion.span>
                       </div>
 
                       <AnimatePresence initial={false}>
                         {isOpen && (
                           <motion.div
-                            key="content"
+                            key="body"
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: "auto", opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+                            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                             className="overflow-hidden"
                           >
-                            <p className="font-dm font-[300] text-white-dim text-[15px] leading-relaxed mt-3 pr-4">
+                            <p className="font-dm font-[300] text-white-dim text-[15px] leading-[1.7] mt-3 pr-6">
                               {step.body}
                             </p>
                             {step.badge && (
-                              <span className="inline-block mt-3 font-mono text-[10px] tracking-[2px] uppercase text-teal bg-[rgba(0,229,200,0.10)] border border-[rgba(0,229,200,0.25)] px-3 py-1 rounded-full">
-                                {step.badge}
-                              </span>
+                              <div className="mt-4">
+                                <span className="inline-flex items-center gap-2 font-mono text-[10px] tracking-[2px] uppercase text-teal bg-[rgba(0,229,200,0.08)] border border-[rgba(0,229,200,0.25)] px-3 py-1.5 rounded-full">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-teal animate-pulse" />
+                                  {step.badge}
+                                </span>
+                              </div>
                             )}
                           </motion.div>
                         )}
                       </AnimatePresence>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>
 
-          {/* Right: Step preview card */}
-          <div className="md:sticky md:top-28">
+          {/* Right: Preview card — glassmorphism */}
+          <div className="lg:sticky lg:top-28">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeStep}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.35 }}
-                className="bg-navy3 border border-[rgba(0,229,200,0.20)] rounded-lg p-8 shadow-[0_0_40px_rgba(0,229,200,0.04)]"
+                initial={{ opacity: 0, y: 20, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -20, scale: 0.97 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                className="glass rounded-2xl p-8 shadow-[0_24px_80px_rgba(0,0,0,0.4),0_0_0_1px_rgba(0,229,200,0.10)]"
               >
-                {/* Step indicator */}
+                {/* Top row */}
                 <div className="flex items-center justify-between mb-8">
-                  <span className="font-mono text-[11px] text-white-dim tracking-[3px] uppercase">
-                    Step {current.num}
-                  </span>
-                  <span className="font-mono text-[10px] text-teal bg-[rgba(0,229,200,0.10)] px-3 py-1 rounded-full">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-teal shadow-[0_0_8px_rgba(0,229,200,0.8)]" style={{ animation: "pulse 2s infinite" }} />
+                    <span className="font-mono text-[11px] text-white-dim tracking-[3px] uppercase">
+                      Step {current.num} / 06
+                    </span>
+                  </div>
+                  <span className="font-mono text-[10px] text-teal bg-[rgba(0,229,200,0.10)] border border-[rgba(0,229,200,0.20)] px-3 py-1 rounded-full">
                     {current.status}
                   </span>
                 </div>
 
                 {/* Icon */}
-                <div className="w-16 h-16 rounded-xl border border-[rgba(0,229,200,0.25)] flex items-center justify-center mb-6">
-                  <current.Icon className="w-7 h-7 text-teal" strokeWidth={1.5} />
+                <div className="w-20 h-20 rounded-2xl border border-[rgba(0,229,200,0.20)] bg-[rgba(0,229,200,0.04)] flex items-center justify-center mb-8 shadow-[inset_0_0_30px_rgba(0,229,200,0.04)]">
+                  <current.Icon className="w-9 h-9 text-teal" strokeWidth={1.25} />
                 </div>
 
                 {/* Title */}
-                <h4 className="font-bebas text-[28px] text-white-off mb-3 leading-tight">
+                <h4 className="font-bebas text-[32px] text-white-off mb-2 leading-tight">
                   {current.title}
                 </h4>
 
-                {/* Metric */}
-                <div className="flex items-center gap-2 mt-6 pt-6 border-t border-[rgba(0,229,200,0.10)]">
-                  <div className="w-2 h-2 rounded-full bg-teal animate-pulse-glow" />
-                  <span className="font-mono text-[12px] text-teal tracking-[2px]">
-                    {current.metric}
+                {/* Metric bar */}
+                <div className="mt-8 pt-6 border-t border-[rgba(0,229,200,0.08)] flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-teal" />
+                    <span className="font-mono text-[12px] text-teal tracking-[2px]">
+                      {current.metric}
+                    </span>
+                  </div>
+                  <span className="font-mono text-[11px] text-white-dim">
+                    {activeStep + 1} of {steps.length}
                   </span>
                 </div>
 
-                {/* Step progress dots */}
-                <div className="flex gap-2 mt-6">
+                {/* Progress bar */}
+                <div className="mt-4 h-[2px] bg-[rgba(0,229,200,0.10)] rounded-full overflow-hidden">
+                  <motion.div
+                    className="h-full bg-teal rounded-full"
+                    animate={{ width: `${((activeStep + 1) / steps.length) * 100}%` }}
+                    transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  />
+                </div>
+
+                {/* Step dots */}
+                <div className="flex gap-1.5 mt-5">
                   {steps.map((_, i) => (
                     <button
                       key={i}
                       onClick={() => setActiveStep(i)}
-                      aria-label={`Go to step ${i + 1}`}
-                      className={`h-1 rounded-full transition-all duration-300 cursor-pointer ${
-                        i === activeStep ? "w-8 bg-teal" : "w-4 bg-[rgba(0,229,200,0.20)] hover:bg-[rgba(0,229,200,0.40)]"
+                      aria-label={`Step ${i + 1}`}
+                      className={`cursor-pointer transition-all duration-300 rounded-full ${
+                        i === activeStep
+                          ? "w-6 h-1.5 bg-teal shadow-[0_0_8px_rgba(0,229,200,0.6)]"
+                          : "w-3 h-1.5 bg-[rgba(0,229,200,0.20)] hover:bg-[rgba(0,229,200,0.40)]"
                       }`}
                     />
                   ))}

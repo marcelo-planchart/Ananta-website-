@@ -2,13 +2,9 @@
 
 import { useRef, useState } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
+import { Plus } from "lucide-react";
 
-interface FAQItem {
-  q: string;
-  a: string;
-}
-
-const faqs: FAQItem[] = [
+const faqs = [
   {
     q: "How is Ananta different from general AI takeoff tools?",
     a: "We are built exclusively for the glass and glazing industry. General tools can read blueprints — they can't identify glazing system types, aluminum profiles, or hardware sets. We can, because our AI was trained on 13 years of real glazing projects.",
@@ -46,28 +42,33 @@ const faqs: FAQItem[] = [
 export default function FAQ() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" ref={ref} className="py-24 bg-navy">
-      <div className="max-w-3xl mx-auto px-6">
+    <section id="faq" ref={ref} className="section-pad bg-navy relative overflow-hidden">
+      <div className="absolute inset-0 grid-overlay opacity-30 pointer-events-none" />
+
+      <div className="max-w-3xl mx-auto px-6 relative z-10">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 28 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <p className="font-mono text-teal text-[11px] tracking-[4px] uppercase mb-4">
-            // FAQ
-          </p>
-          <h2 className="font-bebas text-[clamp(40px,5vw,64px)] text-white-off leading-tight">
-            Everything You Need to Know
+          <div className="flex items-center justify-center gap-3 mb-5">
+            <div className="h-[1px] w-8 bg-teal" />
+            <p className="font-mono text-teal text-[11px] tracking-[4px] uppercase">FAQ</p>
+            <div className="h-[1px] w-8 bg-teal" />
+          </div>
+          <h2 className="font-bebas text-[clamp(44px,5.5vw,72px)] leading-[0.95] text-white-off">
+            Everything You{" "}
+            <span className="text-gradient-teal">Need to Know</span>
           </h2>
         </motion.div>
 
         {/* Accordion */}
-        <div className="space-y-0">
+        <div className="space-y-3">
           {faqs.map((item, i) => {
             const isOpen = openIndex === i;
             return (
@@ -75,27 +76,27 @@ export default function FAQ() {
                 key={i}
                 initial={{ opacity: 0, y: 16 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: i * 0.07 }}
-                className="border-b border-[rgba(0,229,200,0.10)]"
+                transition={{ duration: 0.5, delay: i * 0.06 }}
+                className={`glass rounded-xl overflow-hidden transition-all duration-300 ${
+                  isOpen ? "border-[rgba(0,229,200,0.25)]" : "hover:border-[rgba(0,229,200,0.15)]"
+                }`}
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : i)}
-                  className="w-full flex items-center justify-between py-5 text-left group"
+                  className="w-full flex items-center justify-between px-6 py-5 text-left cursor-pointer group"
                 >
-                  <span
-                    className={`font-dm font-[400] text-[15px] pr-8 transition-colors duration-200 ${
-                      isOpen ? "text-teal" : "text-white-off group-hover:text-teal"
-                    }`}
-                  >
+                  <span className={`font-dm font-[400] text-[15px] pr-6 transition-colors duration-200 ${
+                    isOpen ? "text-teal" : "text-white-off group-hover:text-teal"
+                  }`}>
                     {item.q}
                   </span>
-                  <span
-                    className={`shrink-0 text-teal text-[18px] transition-transform duration-300 ${
-                      isOpen ? "rotate-45" : ""
-                    }`}
+                  <motion.div
+                    animate={{ rotate: isOpen ? 45 : 0 }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                    className="shrink-0 w-6 h-6 rounded-full border border-[rgba(0,229,200,0.25)] flex items-center justify-center text-teal group-hover:border-teal group-hover:bg-[rgba(0,229,200,0.06)] transition-all duration-200"
                   >
-                    +
-                  </span>
+                    <Plus size={12} />
+                  </motion.div>
                 </button>
 
                 <AnimatePresence initial={false}>
@@ -105,10 +106,10 @@ export default function FAQ() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                       className="overflow-hidden"
                     >
-                      <p className="font-dm font-[300] text-white-dim text-[14px] leading-relaxed pb-5">
+                      <p className="font-dm font-[300] text-white-dim text-[14px] leading-[1.75] px-6 pb-6">
                         {item.a}
                       </p>
                     </motion.div>

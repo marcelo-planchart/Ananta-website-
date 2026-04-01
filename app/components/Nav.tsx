@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
 
 const links = [
   { label: "Services", href: "#services" },
@@ -17,13 +18,13 @@ export default function Nav() {
   const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
+    const handleScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    const sections = ["services", "how-it-works", "pricing", "testimonials", "faq"];
+    const sections = ["services", "how-it-works", "pricing", "about", "faq"];
     const observers = sections.map((id) => {
       const el = document.getElementById(id);
       if (!el) return null;
@@ -39,27 +40,35 @@ export default function Nav() {
 
   return (
     <>
-      {/* Top teal bar */}
-      <div className="fixed top-0 left-0 right-0 h-[4px] bg-teal z-50" />
+      {/* Top teal line */}
+      <div className="fixed top-0 left-0 right-0 h-[3px] z-50"
+        style={{ background: "linear-gradient(90deg, transparent, #00E5C8 30%, #00E5C8 70%, transparent)" }}
+      />
 
-      <header
-        className={`fixed top-[4px] left-0 right-0 z-40 transition-all duration-300 ${
-          scrolled
-            ? "bg-[rgba(5,13,26,0.92)] backdrop-blur-[20px] border-b border-[rgba(0,229,200,0.10)]"
-            : "bg-transparent"
-        }`}
+      {/* Floating nav */}
+      <motion.header
+        initial={{ opacity: 0, y: -16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+        className={`fixed top-[3px] left-0 right-0 z-40 flex justify-center px-4 pt-4 pointer-events-none`}
       >
-        <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <nav
+          className={`pointer-events-auto w-full max-w-5xl flex items-center justify-between px-5 h-14 rounded-xl transition-all duration-500 ${
+            scrolled
+              ? "glass-strong shadow-[0_8px_40px_rgba(0,0,0,0.5),0_0_0_1px_rgba(0,229,200,0.08)]"
+              : "bg-[rgba(5,13,26,0.4)] backdrop-blur-[12px] border border-[rgba(0,229,200,0.08)]"
+          }`}
+        >
           {/* Logo */}
-          <a href="#" className="flex items-center gap-0 group">
-            <span className="font-bebas text-[22px] tracking-wider text-white-off group-hover:text-white transition-colors">
+          <a href="#" className="flex items-center group shrink-0">
+            <span className="font-bebas text-[20px] tracking-widest text-white-off group-hover:text-white transition-colors">
               ANANTA
             </span>
-            <span className="font-bebas text-[22px] text-teal">.</span>
+            <span className="font-bebas text-[20px] text-teal">.</span>
           </a>
 
-          {/* Center Links */}
-          <ul className="hidden md:flex items-center gap-8">
+          {/* Center links */}
+          <ul className="hidden md:flex items-center gap-1">
             {links.map((link) => {
               const sectionId = link.href.replace("#", "");
               const isActive = activeSection === sectionId;
@@ -67,13 +76,16 @@ export default function Nav() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className={`font-dm text-sm font-[400] tracking-wide transition-colors duration-200 ${
+                    className={`relative font-dm text-[13px] px-4 py-2 rounded-lg transition-all duration-200 ${
                       isActive
-                        ? "text-teal"
-                        : "text-white-dim hover:text-white-off"
+                        ? "text-teal bg-[rgba(0,229,200,0.06)]"
+                        : "text-white-dim hover:text-white-off hover:bg-[rgba(255,255,255,0.04)]"
                     }`}
                   >
                     {link.label}
+                    {isActive && (
+                      <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-teal" />
+                    )}
                   </a>
                 </li>
               );
@@ -81,16 +93,16 @@ export default function Nav() {
           </ul>
 
           {/* Right CTAs */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-2 shrink-0">
             <a
               href="#"
-              className="font-dm text-sm font-[400] text-white-dim hover:text-white-off transition-colors px-4 py-2 border border-[rgba(0,229,200,0.20)] rounded-sm hover:border-teal"
+              className="font-dm text-[13px] text-white-dim hover:text-white-off transition-colors px-4 py-2"
             >
               Log In
             </a>
             <a
               href="#cta"
-              className="font-dm text-sm font-[500] tracking-wider bg-teal text-navy px-5 py-2 rounded-sm hover:bg-teal-dim transition-colors"
+              className="font-dm text-[13px] font-[500] tracking-wide bg-teal text-navy px-5 py-2 rounded-lg hover:bg-teal-dim transition-all duration-200 shadow-[0_0_20px_rgba(0,229,200,0.25)] hover:shadow-[0_0_30px_rgba(0,229,200,0.4)]"
             >
               Book a Demo
             </a>
@@ -99,49 +111,53 @@ export default function Nav() {
           {/* Hamburger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden flex flex-col gap-[5px] p-2 cursor-pointer"
+            className="md:hidden p-2 text-white-off hover:text-teal transition-colors cursor-pointer"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
           >
-            <span className={`block w-6 h-[2px] bg-white-off transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[7px]" : ""}`} />
-            <span className={`block w-6 h-[2px] bg-white-off transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
-            <span className={`block w-6 h-[2px] bg-white-off transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-[7px]" : ""}`} />
+            {menuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </nav>
-      </header>
+      </motion.header>
 
       {/* Mobile Menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-30 bg-navy pt-20 flex flex-col"
+            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+            animate={{ opacity: 1, backdropFilter: "blur(20px)" }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-30 bg-[rgba(5,13,26,0.92)] pt-24 flex flex-col px-6"
           >
-            <ul className="flex flex-col items-center gap-8 mt-12">
-              {links.map((link) => (
-                <li key={link.label}>
+            <ul className="flex flex-col gap-2 mt-8">
+              {links.map((link, i) => (
+                <motion.li
+                  key={link.label}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.06 }}
+                >
                   <a
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
-                    className="font-bebas text-3xl tracking-widest text-white-off hover:text-teal transition-colors"
+                    className="flex items-center justify-between font-bebas text-[28px] tracking-widest text-white-off hover:text-teal transition-colors py-3 border-b border-[rgba(0,229,200,0.08)]"
                   >
                     {link.label}
+                    <span className="text-teal text-[16px]">›</span>
                   </a>
-                </li>
+                </motion.li>
               ))}
             </ul>
-            <div className="flex flex-col items-center gap-4 mt-12">
+            <div className="flex flex-col gap-3 mt-10">
               <a
                 href="#cta"
                 onClick={() => setMenuOpen(false)}
-                className="font-dm font-[500] tracking-wider bg-teal text-navy px-10 py-3 rounded-sm hover:bg-teal-dim transition-colors"
+                className="font-dm font-[500] tracking-wider bg-teal text-navy text-center py-4 rounded-xl shadow-[0_0_30px_rgba(0,229,200,0.3)]"
               >
                 Book a Demo
               </a>
-              <a href="#" className="font-dm text-white-dim hover:text-white-off transition-colors">
+              <a href="#" className="font-dm text-white-dim text-center hover:text-white-off transition-colors py-2">
                 Log In
               </a>
             </div>

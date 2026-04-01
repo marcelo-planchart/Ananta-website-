@@ -2,17 +2,14 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-
-interface PlanFeature {
-  text: string;
-}
+import { Check } from "lucide-react";
 
 interface Plan {
   name: string;
   price: string;
   period?: string;
   tagline: string;
-  features: PlanFeature[];
+  features: string[];
   cta: string;
   ctaStyle: string;
   highlighted?: boolean;
@@ -26,30 +23,31 @@ const plans: Plan[] = [
     period: "/ month",
     tagline: "For existing Elite Drafting clients",
     features: [
-      { text: "Project management & CRM" },
-      { text: "Client portal access" },
-      { text: "Team & workload dashboard" },
-      { text: "Basic quoting tools" },
-      { text: "Field communication" },
+      "Project management & CRM",
+      "Client portal access",
+      "Team & workload dashboard",
+      "Basic quoting tools",
+      "Field communication",
     ],
     cta: "Start Free",
     ctaStyle:
-      "border border-[rgba(0,229,200,0.30)] text-teal hover:bg-[rgba(0,229,200,0.06)] transition-colors",
+      "border border-[rgba(0,229,200,0.25)] text-teal hover:bg-[rgba(0,229,200,0.06)] hover:border-teal transition-all duration-300",
   },
   {
     name: "PRO",
     price: "Contact",
     tagline: "For contractors ready to automate",
     features: [
-      { text: "Everything in Free" },
-      { text: "AI takeoff engine" },
-      { text: "Automated submittal packages" },
-      { text: "Priority turnaround (24–48 hr)" },
-      { text: "Dedicated account manager" },
-      { text: "API access" },
+      "Everything in Free",
+      "AI takeoff engine",
+      "Automated submittal packages",
+      "Priority turnaround (24–48 hr)",
+      "Dedicated account manager",
+      "API access",
     ],
     cta: "Book a Demo",
-    ctaStyle: "bg-teal text-navy hover:bg-teal-dim transition-colors font-[500]",
+    ctaStyle:
+      "bg-teal text-navy hover:bg-teal-dim transition-all duration-300 shadow-[0_0_30px_rgba(0,229,200,0.25)] hover:shadow-[0_0_50px_rgba(0,229,200,0.40)] font-[500]",
     highlighted: true,
     badge: "Most Popular",
   },
@@ -58,16 +56,16 @@ const plans: Plan[] = [
     price: "Custom",
     tagline: "For high-volume glazing operations",
     features: [
-      { text: "Everything in Pro" },
-      { text: "Custom AI model training on your data" },
-      { text: "Shop drawings SLA" },
-      { text: "Engineering stamps included" },
-      { text: "Custom hardware database" },
-      { text: "Volume discounts" },
+      "Everything in Pro",
+      "Custom AI model training",
+      "Shop drawings SLA",
+      "Engineering stamps included",
+      "Custom hardware database",
+      "Volume discounts",
     ],
     cta: "Contact Sales",
     ctaStyle:
-      "border border-[rgba(0,229,200,0.30)] text-teal hover:bg-[rgba(0,229,200,0.06)] transition-colors",
+      "border border-[rgba(0,229,200,0.25)] text-teal hover:bg-[rgba(0,229,200,0.06)] hover:border-teal transition-all duration-300",
   },
 ];
 
@@ -76,80 +74,91 @@ export default function Pricing() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="pricing" ref={ref} className="py-24 bg-navy">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="pricing" ref={ref} className="section-pad bg-navy2 relative overflow-hidden">
+      <div className="absolute inset-0 grid-overlay opacity-30 pointer-events-none" />
+
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 28 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.8 }}
+          className="text-center mb-20"
         >
-          <p className="font-mono text-teal text-[11px] tracking-[4px] uppercase mb-4">
-            // PRICING
-          </p>
-          <h2 className="font-bebas text-[clamp(40px,5vw,72px)] text-white-off leading-tight mb-4">
-            Simple Pricing. Start Free.
+          <div className="flex items-center justify-center gap-3 mb-5">
+            <div className="h-[1px] w-8 bg-teal" />
+            <p className="font-mono text-teal text-[11px] tracking-[4px] uppercase">Pricing</p>
+            <div className="h-[1px] w-8 bg-teal" />
+          </div>
+          <h2 className="font-bebas text-[clamp(44px,5.5vw,80px)] leading-[0.95] text-white-off mb-5">
+            Simple Pricing.{" "}
+            <span className="text-gradient-teal">Start Free.</span>
           </h2>
-          <p className="font-dm font-[300] text-white-dim text-[18px]">
-            If you&apos;re already an Elite Drafting client, the platform is included.
-            No extra cost.
+          <p className="font-dm font-[300] text-white-dim text-[18px] max-w-lg mx-auto">
+            If you&apos;re already an Elite Drafting client, the platform is included. No extra cost.
           </p>
         </motion.div>
 
         {/* Plans */}
-        <div className="grid md:grid-cols-3 gap-6 items-start">
+        <div className="grid md:grid-cols-3 gap-5 items-start">
           {plans.map((plan, i) => (
             <motion.div
               key={plan.name}
-              initial={{ opacity: 0, y: 32 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: i * 0.12 }}
-              className={`relative bg-navy3 rounded-lg p-8 border transition-all duration-300 ${
+              transition={{ duration: 0.7, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+              className={`relative glass rounded-2xl p-8 transition-all duration-300 ${
                 plan.highlighted
-                  ? "border-teal shadow-[0_0_60px_rgba(0,229,200,0.10)] md:-mt-4 md:pb-12"
-                  : "border-[rgba(0,229,200,0.10)]"
+                  ? "border-[rgba(0,229,200,0.35)] shadow-[0_0_80px_rgba(0,229,200,0.08)] md:-mt-6 md:pb-14"
+                  : "hover:border-[rgba(0,229,200,0.18)]"
               }`}
             >
+              {/* Highlighted glow */}
+              {plan.highlighted && (
+                <div className="absolute inset-0 rounded-2xl pointer-events-none"
+                  style={{ background: "radial-gradient(ellipse 80% 40% at 50% 0%, rgba(0,229,200,0.05) 0%, transparent 60%)" }}
+                />
+              )}
+
               {/* Badge */}
               {plan.badge && (
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                  <span className="font-mono text-[10px] tracking-[2px] uppercase text-navy bg-teal px-4 py-1 rounded-full">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                  <span className="font-mono text-[10px] tracking-[2px] uppercase text-navy bg-teal px-4 py-1.5 rounded-full shadow-[0_0_20px_rgba(0,229,200,0.4)]">
                     {plan.badge}
                   </span>
                 </div>
               )}
 
               {/* Plan name */}
-              <p className="font-bebas text-[14px] tracking-[4px] text-white-dim mb-1">
-                {plan.name}
-              </p>
+              <p className="font-bebas text-[12px] tracking-[5px] text-white-dim mb-2">{plan.name}</p>
 
               {/* Price */}
               <div className="flex items-end gap-1 mb-2">
-                <span className="font-bebas text-[52px] text-white-off leading-none">
+                <span className={`font-bebas text-[56px] leading-none ${plan.highlighted ? "text-gradient-teal" : "text-white-off"}`}>
                   {plan.price}
                 </span>
                 {plan.period && (
-                  <span className="font-dm text-[14px] text-white-dim mb-2">
-                    {plan.period}
-                  </span>
+                  <span className="font-dm text-[14px] text-white-dim mb-3">{plan.period}</span>
                 )}
               </div>
 
               {/* Tagline */}
-              <p className="font-dm font-[300] text-white-dim text-[13px] mb-8 pb-6 border-b border-[rgba(0,229,200,0.10)]">
+              <p className="font-dm font-[300] text-white-dim text-[13px] mb-8 pb-7 border-b border-[rgba(0,229,200,0.08)]">
                 {plan.tagline}
               </p>
 
               {/* Features */}
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-3.5 mb-10">
                 {plan.features.map((f) => (
-                  <li key={f.text} className="flex items-start gap-3">
-                    <span className="text-teal text-[14px] mt-[1px] shrink-0">✓</span>
-                    <span className="font-dm font-[300] text-white-dim text-[14px]">
-                      {f.text}
-                    </span>
+                  <li key={f} className="flex items-start gap-3">
+                    <div className={`shrink-0 mt-0.5 w-4 h-4 rounded-full flex items-center justify-center ${
+                      plan.highlighted
+                        ? "bg-teal text-navy"
+                        : "border border-[rgba(0,229,200,0.30)] text-teal"
+                    }`}>
+                      <Check size={10} strokeWidth={3} />
+                    </div>
+                    <span className="font-dm font-[300] text-white-dim text-[14px] leading-snug">{f}</span>
                   </li>
                 ))}
               </ul>
@@ -157,7 +166,7 @@ export default function Pricing() {
               {/* CTA */}
               <a
                 href="#cta"
-                className={`block text-center font-dm text-sm tracking-wider py-3 px-6 rounded-sm cursor-pointer ${plan.ctaStyle}`}
+                className={`block text-center font-dm text-[14px] tracking-wide py-3.5 px-6 rounded-xl cursor-pointer ${plan.ctaStyle}`}
               >
                 {plan.cta}
               </a>
@@ -166,16 +175,20 @@ export default function Pricing() {
         </div>
 
         {/* ROI note */}
-        <motion.p
+        <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.7, delay: 0.5 }}
-          className="font-dm font-[300] text-white-dim text-[13px] text-center mt-10 max-w-2xl mx-auto leading-relaxed"
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="mt-12 text-center"
         >
-          <span className="font-[500] text-white-off">Enterprise pricing available:</span>{" "}
-          We calculate your 5-year manual labor cost savings and charge 20% of that as your
-          annual contract. Clear ROI before you sign.
-        </motion.p>
+          <div className="inline-block glass rounded-xl px-8 py-5 max-w-2xl">
+            <p className="font-dm font-[300] text-white-dim text-[13px] leading-relaxed">
+              <span className="font-[500] text-white-off">Enterprise pricing available:</span>{" "}
+              We calculate your 5-year manual labor cost savings and charge 20% of that as your annual
+              contract. Clear ROI before you sign.
+            </p>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

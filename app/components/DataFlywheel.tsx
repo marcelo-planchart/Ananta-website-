@@ -6,19 +6,23 @@ import { motion, useInView } from "framer-motion";
 const moatPoints = [
   {
     title: "Behavioral Correction Data",
-    body: "Every expert fix Silvia makes becomes a labeled training pair. After thousands of projects, this dataset is impossible to replicate without years of operations inside a trust relationship.",
+    body: "Every expert fix becomes a labeled training pair. After thousands of projects, this dataset is impossible to replicate without years of operations inside a trust relationship.",
+    metric: "Grows with every project",
   },
   {
     title: "Embedded in the Workflow",
     body: "Contractors can't leave without losing access to their entire project history, drawings, and stamps. Switching costs compound with every project.",
+    metric: "Deep lock-in",
   },
   {
     title: "Engineering Authority",
-    body: "We hold the California engineering license every project legally requires. This cannot be rushed. It took 13 years to build.",
+    body: "We hold the California engineering license every project legally requires. This cannot be rushed, replicated, or bought. It took 13 years to build.",
+    metric: "13 years to earn",
   },
   {
     title: "Technical Databases",
     body: "Thousands of aluminum profile and hardware SKUs from dozens of manufacturers — enabling automated submittal generation that takes years to compile.",
+    metric: "Industry-exclusive",
   },
 ];
 
@@ -29,133 +33,113 @@ const nodes = [
   { label: "Better Model", angle: 180 },
 ];
 
-function FlywheelDiagram() {
-  const radius = 110;
+function FlywheelSVG() {
+  const R = 110;
   const cx = 160;
   const cy = 160;
 
   return (
-    <div className="flex items-center justify-center">
-      <svg
-        width="320"
-        height="320"
-        viewBox="0 0 320 320"
-        className="overflow-visible"
-      >
-        {/* Dashed circle arc — rotates */}
-        <g
+    <div className="flex items-center justify-center select-none">
+      <div className="relative">
+        {/* Outer glow ring */}
+        <div
+          className="absolute inset-0 rounded-full pointer-events-none"
           style={{
-            transformOrigin: "160px 160px",
-            animation: "spin 20s linear infinite",
+            background: "radial-gradient(circle, rgba(0,229,200,0.06) 40%, transparent 70%)",
           }}
-        >
-          <circle
-            cx={cx}
-            cy={cy}
-            r={radius}
-            fill="none"
-            stroke="rgba(0,229,200,0.3)"
-            strokeWidth="1.5"
-            strokeDasharray="8 6"
-          />
-        </g>
-
-        {/* Static connecting lines */}
-        {nodes.map((node, i) => {
-          const next = nodes[(i + 1) % nodes.length];
-          const ax = cx + radius * Math.cos((node.angle * Math.PI) / 180);
-          const ay = cy + radius * Math.sin((node.angle * Math.PI) / 180);
-          const bx = cx + radius * Math.cos((next.angle * Math.PI) / 180);
-          const by = cy + radius * Math.sin((next.angle * Math.PI) / 180);
-          return (
-            <line
-              key={i}
-              x1={ax}
-              y1={ay}
-              x2={bx}
-              y2={by}
-              stroke="rgba(0,229,200,0.12)"
+        />
+        <svg width="320" height="320" viewBox="0 0 320 320" className="overflow-visible">
+          {/* Outer ring — slow spin */}
+          <g style={{ transformOrigin: "160px 160px", animation: "spin 20s linear infinite" }}>
+            <circle
+              cx={cx} cy={cy} r={R + 20}
+              fill="none"
+              stroke="rgba(0,229,200,0.06)"
               strokeWidth="1"
-              strokeDasharray="4 4"
+              strokeDasharray="3 6"
             />
-          );
-        })}
+          </g>
 
-        {/* Node dots and labels */}
-        {nodes.map((node) => {
-          const x = cx + radius * Math.cos((node.angle * Math.PI) / 180);
-          const y = cy + radius * Math.sin((node.angle * Math.PI) / 180);
+          {/* Main arc — counter spin */}
+          <g style={{ transformOrigin: "160px 160px", animation: "spin 14s linear infinite reverse" }}>
+            <circle
+              cx={cx} cy={cy} r={R}
+              fill="none"
+              stroke="rgba(0,229,200,0.25)"
+              strokeWidth="1.5"
+              strokeDasharray="10 6"
+            />
+          </g>
 
-          // Label positioning
-          const labelOffsetX = node.angle === 0 ? 18 : node.angle === 180 ? -18 : 0;
-          const labelOffsetY = node.angle === 270 ? -18 : node.angle === 90 ? 18 : 0;
-          const textAnchor =
-            node.angle === 0 ? "start" : node.angle === 180 ? "end" : "middle";
+          {/* Inner ring — spin */}
+          <g style={{ transformOrigin: "160px 160px", animation: "spin 8s linear infinite" }}>
+            <circle
+              cx={cx} cy={cy} r={40}
+              fill="none"
+              stroke="rgba(0,229,200,0.08)"
+              strokeWidth="1"
+              strokeDasharray="4 5"
+            />
+          </g>
 
-          return (
-            <g key={node.label}>
-              {/* Glow ring */}
-              <circle
-                cx={x}
-                cy={y}
-                r="12"
-                fill="rgba(0,229,200,0.08)"
-                style={{
-                  animation: "pulse-glow 2s ease-in-out infinite",
-                  transformOrigin: `${x}px ${y}px`,
-                }}
+          {/* Center filled */}
+          <circle cx={cx} cy={cy} r={32} fill="rgba(0,229,200,0.05)" />
+          <circle cx={cx} cy={cy} r={32} fill="none" stroke="rgba(0,229,200,0.20)" strokeWidth="1" />
+
+          {/* Center text */}
+          <text x={cx} y={cy - 6} fill="#00E5C8" fontSize="13" fontFamily="'Bebas Neue', sans-serif"
+            textAnchor="middle" letterSpacing="3">DATA</text>
+          <text x={cx} y={cy + 12} fill="#00E5C8" fontSize="13" fontFamily="'Bebas Neue', sans-serif"
+            textAnchor="middle" letterSpacing="3">MOAT</text>
+
+          {/* Spoke lines */}
+          {nodes.map((node) => {
+            const x = cx + R * Math.cos((node.angle * Math.PI) / 180);
+            const y = cy + R * Math.sin((node.angle * Math.PI) / 180);
+            return (
+              <line key={node.label}
+                x1={cx} y1={cy} x2={x} y2={y}
+                stroke="rgba(0,229,200,0.06)"
+                strokeWidth="1"
               />
-              {/* Dot */}
-              <circle cx={x} cy={y} r="6" fill="#00E5C8" />
-              {/* Label */}
-              <text
-                x={x + labelOffsetX}
-                y={y + labelOffsetY + (node.angle === 90 ? 14 : node.angle === 270 ? -8 : 4)}
-                fill="#8FA3B1"
-                fontSize="10"
-                fontFamily="DM Mono, monospace"
-                textAnchor={textAnchor}
-                letterSpacing="1"
-              >
-                {node.label}
-              </text>
-            </g>
-          );
-        })}
+            );
+          })}
 
-        {/* Center text */}
-        <text
-          x={cx}
-          y={cy - 8}
-          fill="#00E5C8"
-          fontSize="16"
-          fontFamily="Bebas Neue, sans-serif"
-          textAnchor="middle"
-          letterSpacing="3"
-        >
-          DATA
-        </text>
-        <text
-          x={cx}
-          y={cy + 12}
-          fill="#00E5C8"
-          fontSize="16"
-          fontFamily="Bebas Neue, sans-serif"
-          textAnchor="middle"
-          letterSpacing="3"
-        >
-          MOAT
-        </text>
-      </svg>
+          {/* Nodes */}
+          {nodes.map((node) => {
+            const x = cx + R * Math.cos((node.angle * Math.PI) / 180);
+            const y = cy + R * Math.sin((node.angle * Math.PI) / 180);
+            const labelPad = 28;
+            const lx = node.angle === 0 ? x + labelPad : node.angle === 180 ? x - labelPad : x;
+            const ly = node.angle === 270 ? y - labelPad : node.angle === 90 ? y + labelPad + 6 : y + 5;
+            const anchor = node.angle === 0 ? "start" : node.angle === 180 ? "end" : "middle";
+
+            return (
+              <g key={node.label}>
+                {/* Pulse glow */}
+                <circle cx={x} cy={y} r="14" fill="rgba(0,229,200,0.06)"
+                  style={{ animation: "pulse-glow 2.5s ease-in-out infinite", transformOrigin: `${x}px ${y}px`, animationDelay: `${nodes.indexOf(node) * 0.6}s` }}
+                />
+                {/* Dot */}
+                <circle cx={x} cy={y} r="5" fill="#00E5C8"
+                  style={{ filter: "drop-shadow(0 0 6px rgba(0,229,200,0.8))" }}
+                />
+                {/* Label */}
+                <text x={lx} y={ly} fill="#8FA3B1" fontSize="10"
+                  fontFamily="'DM Mono', monospace" textAnchor={anchor} letterSpacing="1.5">
+                  {node.label}
+                </text>
+              </g>
+            );
+          })}
+        </svg>
+      </div>
 
       <style>{`
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes pulse-glow {
-          0%, 100% { transform: scale(1); opacity: 1; }
-          50% { transform: scale(1.4); opacity: 0.5; }
+          0%, 100% { transform: scale(1); opacity: 0.6; }
+          50% { transform: scale(1.8); opacity: 0.2; }
         }
       `}</style>
     </div>
@@ -167,54 +151,70 @@ export default function DataFlywheel() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="about" ref={ref} className="py-24 bg-navy2">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="about" ref={ref} className="section-pad bg-navy relative overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 grid-overlay opacity-40 pointer-events-none" />
+      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] pointer-events-none"
+        style={{ background: "radial-gradient(circle at 0% 50%, rgba(0,229,200,0.05) 0%, transparent 65%)" }}
+      />
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 28 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="mb-16"
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-20"
         >
-          <p className="font-mono text-teal text-[11px] tracking-[4px] uppercase mb-4">
-            // THE MOAT
-          </p>
-          <h2 className="font-bebas text-[clamp(40px,5vw,72px)] text-white-off leading-tight mb-4">
-            The Data Flywheel Nobody Can Buy
+          <div className="flex items-center gap-3 mb-5">
+            <div className="h-[1px] w-8 bg-teal" />
+            <p className="font-mono text-teal text-[11px] tracking-[4px] uppercase">The Moat</p>
+          </div>
+          <h2 className="font-bebas text-[clamp(44px,5.5vw,80px)] leading-[0.95] text-white-off mb-5">
+            The Data Flywheel{" "}
+            <span className="text-gradient-teal">Nobody Can Buy</span>
           </h2>
           <p className="font-dm font-[300] text-white-dim text-[18px]">
             Every project makes us harder to compete with.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-          {/* Left: Flywheel SVG */}
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Flywheel */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.88 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="flex justify-center"
           >
-            <FlywheelDiagram />
+            <FlywheelSVG />
           </motion.div>
 
-          {/* Right: Moat points */}
-          <div className="space-y-8">
+          {/* Moat points */}
+          <div className="space-y-6">
             {moatPoints.map((point, i) => (
               <motion.div
                 key={point.title}
-                initial={{ opacity: 0, x: 24 }}
+                initial={{ opacity: 0, x: 32 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.7, delay: 0.1 + i * 0.15 }}
-                className="flex gap-4"
+                transition={{ duration: 0.7, delay: 0.15 + i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                className="glass rounded-xl p-6 group hover:border-[rgba(0,229,200,0.20)] transition-all duration-300"
               >
-                <div className="shrink-0 mt-1.5 w-2 h-2 rounded-full bg-teal shadow-[0_0_8px_rgba(0,229,200,0.6)] animate-pulse-glow" />
-                <div>
-                  <h4 className="font-dm font-[500] text-white-off text-[16px] mb-2">
-                    {point.title}
-                  </h4>
-                  <p className="font-dm font-[300] text-white-dim text-[14px] leading-relaxed">
-                    {point.body}
-                  </p>
+                <div className="flex items-start gap-4">
+                  <div className="shrink-0 mt-1 w-1.5 h-1.5 rounded-full bg-teal shadow-[0_0_10px_rgba(0,229,200,0.7)]" />
+                  <div>
+                    <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
+                      <h4 className="font-dm font-[500] text-white-off text-[15px]">
+                        {point.title}
+                      </h4>
+                      <span className="font-mono text-[10px] text-teal tracking-[1px] bg-[rgba(0,229,200,0.08)] px-2 py-0.5 rounded-full">
+                        {point.metric}
+                      </span>
+                    </div>
+                    <p className="font-dm font-[300] text-white-dim text-[14px] leading-[1.7]">
+                      {point.body}
+                    </p>
+                  </div>
                 </div>
               </motion.div>
             ))}
