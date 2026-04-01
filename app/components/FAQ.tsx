@@ -8,7 +8,7 @@ const faqs = [
   { q: "How is Ananta different from general AI takeoff tools?", a: "We are built exclusively for the glass and glazing industry. Our AI was trained on 13 years of real glazing projects — it identifies glazing system types, aluminum profiles, and hardware sets that general tools miss." },
   { q: "Do I need to change how I submit plans?",                a: "No. Upload PDF, DWG, or scanned drawings. Most contractors are running on day one without any workflow changes." },
   { q: "How fast do I get my shop drawings back?",               a: "Standard projects: 24–48 hours. Complex curtain wall or structural glass: 3–5 business days. We always communicate timelines upfront." },
-  { q: "What is the engineering stamp and why does it matter?",  a: "A California-licensed structural engineering stamp is legally required on shop drawings submitted to general contractors and building departments. We hold that license." },
+  { q: "What is the engineering stamp and why does it matter?",   a: "A California-licensed structural engineering stamp is legally required on shop drawings submitted to general contractors and building departments. We hold that license." },
   { q: "Is the AI output reviewed by a human?",                  a: "Always. Every AI takeoff is reviewed by a senior glazing specialist before delivery — what we call the Human Gate." },
   { q: "Can I get a demo before committing?",                    a: "Yes. Book a 20-minute demo and we'll run your actual drawings through the AI live so you see results on your own project." },
   { q: "Is my project data secure?",                             a: "All data is encrypted at rest. Your drawings and project history are never shared or used to train models for competitors." },
@@ -27,39 +27,41 @@ export default function FAQ() {
           initial={{ opacity: 0, y: 28 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-14"
+          className="mb-14"
         >
           <p className="font-mono text-teal text-[11px] tracking-[4px] uppercase mb-4">FAQ</p>
-          <h2 className="font-display font-semibold text-[clamp(40px,4.5vw,64px)] leading-[1.0] text-ink">
-            Common <em className="italic text-gradient-teal">Questions</em>
+          <h2 className="font-display font-bold text-[clamp(36px,4vw,56px)] leading-[1.05] text-ink tracking-tight">
+            Common Questions
           </h2>
         </motion.div>
 
-        <div className="space-y-2">
+        <div className="space-y-1.5">
           {faqs.map((item, i) => {
             const isOpen = openIndex === i;
             return (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 14 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: i * 0.045 }}
-                className={`bg-canvas rounded-xl border transition-all duration-300 ${
-                  isOpen ? "border-teal/30 shadow-sm" : "border-stroke hover:border-stroke-strong"
+                transition={{ duration: 0.5, delay: i * 0.04 }}
+                className={`rounded-lg border transition-all duration-300 ${
+                  isOpen ? "border-teal/25 bg-canvas shadow-sm" : "border-stroke bg-canvas hover:border-stroke-strong"
                 }`}
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : i)}
                   className="w-full flex items-center justify-between px-6 py-5 text-left cursor-pointer group"
                 >
-                  <span className={`font-sans font-[500] text-[15px] pr-6 transition-colors duration-200 ${isOpen ? "text-teal" : "text-ink group-hover:text-teal"}`}>
+                  <span className={`font-sans font-[600] text-[14px] pr-6 transition-colors duration-200 ${isOpen ? "text-teal" : "text-ink group-hover:text-teal"}`}>
                     {item.q}
                   </span>
                   <motion.div
                     animate={{ rotate: isOpen ? 45 : 0 }}
-                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] as [number,number,number,number] }}
-                    className={`shrink-0 w-6 h-6 rounded-full border flex items-center justify-center transition-all duration-200 ${
-                      isOpen ? "border-teal bg-teal-bg text-teal" : "border-stroke text-ink-dim group-hover:border-teal group-hover:text-teal"
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+                    className={`shrink-0 w-6 h-6 rounded-md border flex items-center justify-center transition-all duration-200 ${
+                      isOpen
+                        ? "border-teal bg-teal-bg text-teal"
+                        : "border-stroke text-ink-dim group-hover:border-teal group-hover:text-teal"
                     }`}
                   >
                     <Plus size={12} />
@@ -72,10 +74,10 @@ export default function FAQ() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as [number,number,number,number] }}
+                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
                       className="overflow-hidden"
                     >
-                      <p className="font-sans font-[300] text-ink-dim text-[14px] leading-[1.8] px-6 pb-6">{item.a}</p>
+                      <p className="font-sans text-ink-dim text-[14px] leading-[1.8] px-6 pb-6">{item.a}</p>
                     </motion.div>
                   )}
                 </AnimatePresence>

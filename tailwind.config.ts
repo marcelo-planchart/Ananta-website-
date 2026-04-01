@@ -9,40 +9,32 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Warm parchment surfaces
-        canvas:   "#F7F4EF",
-        canvas2:  "#EDEAD3",
-        canvas3:  "#E1DCD2",
-        // Text
-        ink:      "#0D0C0A",
-        "ink-dim":"#7A776E",
-        // Deep forest teal — sophisticated, AA-contrast on cream
-        teal:        "#0D6B5A",
-        "teal-dark": "#094F41",
-        "teal-dim":  "#147A67",
-        "teal-bg":   "#EAF2EF",
-        // Warm borders
-        stroke:        "rgba(13,12,10,0.09)",
-        "stroke-strong":"rgba(13,12,10,0.16)",
+        canvas:   "#FAFAF8",
+        canvas2:  "#F2F0EB",
+        canvas3:  "#E6E3DC",
+        ink:      "#111111",
+        "ink-mid":"#3A3A38",
+        "ink-dim":"#737068",
+        teal:        "#0A7B68",
+        "teal-dark": "#065C4E",
+        "teal-dim":  "#0F9A82",
+        "teal-bg":   "#EDF5F3",
+        stroke:        "rgba(17,17,17,0.08)",
+        "stroke-strong":"rgba(17,17,17,0.15)",
       },
       fontFamily: {
-        display: ["'Cormorant Garamond'", "serif"],
-        sans:    ["'Outfit'", "sans-serif"],
+        display: ["'Syne'", "sans-serif"],
+        sans:    ["'Instrument Sans'", "sans-serif"],
         mono:    ["'DM Mono'", "monospace"],
       },
       animation: {
-        marquee:      "marquee 36s linear infinite",
-        "pulse-glow": "pulse-glow 2s ease-in-out infinite",
-        float:        "float 6s ease-in-out infinite",
+        marquee: "marquee 40s linear infinite",
+        float:   "float 6s ease-in-out infinite",
       },
       keyframes: {
         marquee: {
           "0%":   { transform: "translateX(0%)" },
           "100%": { transform: "translateX(-50%)" },
-        },
-        "pulse-glow": {
-          "0%, 100%": { transform: "scale(1)", opacity: "1" },
-          "50%":      { transform: "scale(1.4)", opacity: "0.5" },
         },
         float: {
           "0%, 100%": { transform: "translateY(0px)" },

@@ -2,26 +2,22 @@
 
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const testimonials = [
   {
     quote: "Elite has handled our shop drawings for years. They know our projects before we explain them. The AI just made everything faster.",
     name: "Glazing Contractor",
     role: "Los Angeles, CA",
-    initials: "GC",
   },
   {
     quote: "The engineering stamps come back faster than any other firm we've used. Accuracy means fewer revision cycles — which is everything.",
     name: "Project Manager",
     role: "Commercial Glazing",
-    initials: "PM",
   },
   {
     quote: "Getting our submittals assembled used to take a full day. Now it's part of the delivery. Hours back every week.",
     name: "Estimator",
     role: "Commercial Glazing Sub",
-    initials: "ES",
   },
 ];
 
@@ -40,94 +36,80 @@ export default function Testimonials() {
   const t = testimonials[current];
 
   return (
-    <section id="testimonials" ref={ref} className="section-pad bg-ink overflow-hidden relative">
+    <section id="testimonials" ref={ref} className="bg-ink relative grain overflow-hidden">
+      {/* Radial teal wash */}
       <div
         className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(13,107,90,0.08) 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(ellipse 60% 50% at 50% 40%, rgba(10,123,104,0.07) 0%, transparent 70%)" }}
       />
-      <div className="max-w-4xl mx-auto px-8 relative z-10">
+
+      <div className="max-w-5xl mx-auto px-8 py-28 relative z-10">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="text-center mb-20"
+          className="text-center mb-24"
         >
-          <p className="font-mono text-teal text-[11px] tracking-[4px] uppercase mb-4">What Contractors Say</p>
-          <h2 className="font-display font-semibold text-[clamp(32px,4vw,56px)] text-white leading-[1.0]">
-            600+ California glazing contractors<br />
-            <em className="italic font-light text-teal">trust Elite Drafting</em>
+          <p className="font-mono text-teal text-[11px] tracking-[4px] uppercase mb-4">Testimonials</p>
+          <h2 className="font-display font-bold text-[clamp(30px,3.5vw,52px)] text-white leading-[1.05] tracking-tight">
+            600+ California contractors<br />
+            <span className="text-teal font-[500]">trust Elite Drafting</span>
           </h2>
         </motion.div>
 
+        {/* Quote stage */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.9, delay: 0.2 }}
+          transition={{ duration: 1, delay: 0.2 }}
           className="text-center"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
-          <div
-            className="font-display leading-none text-teal/20 select-none mb-[-28px]"
-            style={{ fontSize: "clamp(80px,10vw,130px)" }}
-          >
+          {/* Big decorative open-quote */}
+          <div className="font-display font-bold text-teal/15 leading-none select-none mb-[-20px]" style={{ fontSize: "clamp(72px,8vw,120px)" }}>
             &ldquo;
           </div>
 
           <AnimatePresence mode="wait">
             <motion.div
               key={current}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
             >
-              <p className="font-display italic font-light text-[clamp(20px,2.6vw,32px)] text-white/90 leading-[1.6] max-w-3xl mx-auto mb-10">
+              <p className="font-sans italic font-[400] text-[clamp(18px,2.2vw,28px)] text-white/85 leading-[1.65] max-w-3xl mx-auto mb-10">
                 {t.quote}
               </p>
-              <div className="flex items-center justify-center gap-3 mb-12">
-                <div className="w-9 h-9 rounded-full bg-teal/15 border border-teal/25 flex items-center justify-center">
-                  <span className="font-mono text-[11px] text-teal">{t.initials}</span>
-                </div>
-                <div className="text-left">
-                  <p className="font-sans font-[500] text-white/80 text-[13px]">{t.name}</p>
-                  <p className="font-mono text-[10px] text-white/35 tracking-[1px]">{t.role}</p>
-                </div>
+
+              <div className="flex items-center justify-center gap-3">
+                <div className="h-px w-6 bg-teal/40" />
+                <p className="font-sans font-[600] text-white/65 text-[13px]">{t.name}</p>
+                <span className="text-white/20">·</span>
+                <p className="font-mono text-[11px] text-white/30 tracking-[1px]">{t.role}</p>
+                <div className="h-px w-6 bg-teal/40" />
               </div>
             </motion.div>
           </AnimatePresence>
 
-          <div className="flex items-center justify-center gap-5">
-            <button
-              onClick={() => setCurrent((c) => (c - 1 + testimonials.length) % testimonials.length)}
-              aria-label="Previous"
-              className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-white/35 hover:text-white/80 hover:border-white/25 transition-colors cursor-pointer"
-            >
-              <ChevronLeft size={15} />
-            </button>
-            <div className="flex gap-2">
-              {testimonials.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrent(i)}
-                  aria-label={`Testimonial ${i + 1}`}
-                  className={`cursor-pointer h-[3px] rounded-full transition-all duration-500 ${i === current ? "w-10 bg-teal" : "w-5 bg-white/20 hover:bg-white/40"}`}
-                />
-              ))}
-            </div>
-            <button
-              onClick={() => setCurrent((c) => (c + 1) % testimonials.length)}
-              aria-label="Next"
-              className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-white/35 hover:text-white/80 hover:border-white/25 transition-colors cursor-pointer"
-            >
-              <ChevronRight size={15} />
-            </button>
+          {/* Dots */}
+          <div className="flex items-center justify-center gap-2.5 mt-14">
+            {testimonials.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrent(i)}
+                aria-label={`Testimonial ${i + 1}`}
+                className={`cursor-pointer rounded-full transition-all duration-500 ${
+                  i === current
+                    ? "w-8 h-[3px] bg-teal"
+                    : "w-4 h-[3px] bg-white/15 hover:bg-white/30"
+                }`}
+              />
+            ))}
           </div>
         </motion.div>
-
-        <p className="font-mono text-[10px] text-white/15 text-center mt-10 tracking-[2px] uppercase">
-          Placeholder quotes — to be replaced with real client testimonials
-        </p>
       </div>
     </section>
   );

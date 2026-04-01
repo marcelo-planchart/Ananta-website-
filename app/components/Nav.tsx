@@ -41,25 +41,25 @@ export default function Nav() {
   return (
     <>
       <motion.header
-        initial={{ opacity: 0, y: -16 }}
+        initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
           scrolled
-            ? "bg-[#F7F4EF]/96 backdrop-blur-md border-b border-stroke shadow-[0_1px_24px_rgba(13,12,10,0.06)]"
+            ? "bg-[#FAFAF8]/95 backdrop-blur-lg border-b border-stroke shadow-[0_1px_20px_rgba(17,17,17,0.04)]"
             : "bg-transparent"
         }`}
       >
-        <nav className="max-w-7xl mx-auto px-8 h-[72px] flex items-center justify-between">
+        <nav className="max-w-7xl mx-auto px-8 h-[76px] flex items-center justify-between">
           {/* Wordmark */}
           <a href="#" className="group">
-            <span className="font-display italic font-semibold text-[26px] leading-none tracking-wide text-ink group-hover:text-teal transition-colors duration-300">
-              Ananta<span className="text-teal not-italic">.</span>
+            <span className="font-display font-bold text-[22px] tracking-tight text-ink group-hover:text-teal transition-colors duration-300">
+              Ananta
             </span>
           </a>
 
           {/* Centre links */}
-          <ul className="hidden md:flex items-center gap-1">
+          <ul className="hidden md:flex items-center gap-0.5">
             {links.map((link) => {
               const id = link.href.replace("#", "");
               const active = activeSection === id;
@@ -67,27 +67,34 @@ export default function Nav() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className={`font-sans text-[13px] font-[400] px-4 py-2 rounded-lg tracking-wide transition-all duration-200 ${
+                    className={`relative font-sans text-[13px] px-4 py-2 rounded-md transition-all duration-200 ${
                       active
-                        ? "text-teal font-[500]"
-                        : "text-ink-dim hover:text-ink"
+                        ? "text-teal font-[600]"
+                        : "text-ink-dim hover:text-ink font-[500]"
                     }`}
                   >
                     {link.label}
+                    {active && (
+                      <motion.span
+                        layoutId="nav-dot"
+                        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-teal"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
+                    )}
                   </a>
                 </li>
               );
             })}
           </ul>
 
-          {/* Right CTAs */}
+          {/* Right */}
           <div className="hidden md:flex items-center gap-4">
-            <a href="#" className="font-sans text-[13px] text-ink-dim hover:text-ink transition-colors px-3 py-2">
+            <a href="#" className="font-sans text-[13px] font-[500] text-ink-dim hover:text-ink transition-colors">
               Log In
             </a>
             <a
               href="#cta"
-              className="font-sans text-[13px] font-[500] bg-ink text-canvas px-5 py-2.5 rounded-lg hover:bg-teal transition-all duration-300 tracking-wide"
+              className="font-sans text-[13px] font-[600] bg-ink text-[#FAFAF8] px-5 py-2.5 rounded-md hover:bg-teal transition-all duration-300 tracking-wide"
             >
               Book a Demo
             </a>
@@ -104,41 +111,39 @@ export default function Nav() {
         </nav>
       </motion.header>
 
-      {/* Mobile menu */}
+      {/* Mobile overlay */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-30 bg-canvas pt-[72px] px-8 flex flex-col"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-30 bg-canvas pt-[76px] px-8 flex flex-col"
           >
-            <ul className="flex flex-col mt-6">
+            <ul className="flex flex-col mt-8">
               {links.map((link, i) => (
                 <motion.li
                   key={link.label}
-                  initial={{ opacity: 0, x: -16 }}
+                  initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.06 }}
+                  transition={{ delay: i * 0.05 }}
                 >
                   <a
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
-                    className="flex items-center justify-between font-display font-semibold text-[28px] text-ink hover:text-teal transition-colors py-5 border-b border-stroke"
+                    className="flex items-center justify-between font-display font-bold text-[32px] text-ink hover:text-teal transition-colors py-5 border-b border-stroke"
                   >
                     {link.label}
-                    <span className="text-teal text-[24px] font-light">→</span>
                   </a>
                 </motion.li>
               ))}
             </ul>
-            <div className="flex flex-col gap-3 mt-8">
+            <div className="flex flex-col gap-3 mt-10">
               <a href="#cta" onClick={() => setMenuOpen(false)}
-                className="font-sans font-[500] bg-ink text-canvas text-center py-4 rounded-xl tracking-wide">
+                className="font-sans font-[600] bg-ink text-canvas text-center py-4 rounded-lg">
                 Book a Demo
               </a>
-              <a href="#" className="font-sans text-ink-dim text-center py-2 text-[14px]">Log In</a>
             </div>
           </motion.div>
         )}

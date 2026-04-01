@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { ScanSearch, FileText, Stamp, Package, LayoutDashboard, GitBranch } from "lucide-react";
+import { ScanSearch, FileText, Stamp, Package, LayoutDashboard, GitBranch, ArrowUpRight } from "lucide-react";
 
 const services = [
   { num: "01", title: "AI Takeoff Engine",    desc: "Vision AI extracts every glass panel, frame spec, and dimension from your architectural drawings in minutes.", tag: "Live",         Icon: ScanSearch },
@@ -18,49 +18,56 @@ export default function Services() {
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section id="services" ref={ref} className="section-pad bg-canvas">
+    <section id="services" ref={ref} className="section-pad bg-canvas2">
       <div className="max-w-6xl mx-auto px-8">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="mb-16 max-w-2xl"
+          className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16"
         >
-          <p className="font-mono text-teal text-[11px] tracking-[4px] uppercase mb-4">Our Services</p>
-          <h2 className="font-display font-semibold text-[clamp(40px,4.5vw,68px)] text-ink leading-[1.0] mb-4">
-            Everything Your Glass Business{" "}
-            <em className="italic text-gradient-teal">Needs</em>
-          </h2>
-          <p className="font-sans font-[300] text-ink-dim text-[17px] leading-relaxed">
-            Built by glazing insiders. Trained on 13 years of real projects.
+          <div className="max-w-xl">
+            <p className="font-mono text-teal text-[11px] tracking-[4px] uppercase mb-4">Services</p>
+            <h2 className="font-display font-bold text-[clamp(36px,4.5vw,64px)] text-ink leading-[1.02] tracking-tight">
+              Everything Your Glass<br />Business Needs
+            </h2>
+          </div>
+          <p className="font-sans text-ink-dim text-[15px] leading-relaxed max-w-sm lg:pb-2">
+            Built by glazing insiders. AI trained on 13 years of real California projects.
           </p>
         </motion.div>
 
-        <div>
+        {/* Numbered list */}
+        <div className="border-t border-stroke">
           {services.map((s, i) => (
             <motion.div
               key={s.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
-              className="group flex items-start gap-8 py-8 border-b border-stroke cursor-default hover:bg-canvas2/60 -mx-4 px-4 rounded-xl transition-colors duration-300"
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.6, delay: 0.1 + i * 0.07 }}
+              className="group grid grid-cols-[auto_1fr_auto] items-start gap-6 lg:gap-10 py-7 border-b border-stroke cursor-default"
             >
-              <span className="font-display font-light text-[clamp(32px,3.5vw,48px)] text-ink/15 leading-none w-[3.5ch] shrink-0 group-hover:text-teal/30 transition-colors duration-300 pt-0.5">
+              {/* Number */}
+              <span className="font-display font-bold text-[clamp(28px,3vw,44px)] text-ink/10 leading-none w-[3ch] shrink-0 group-hover:text-teal/25 transition-colors duration-400 pt-0.5 tracking-tight">
                 {s.num}
               </span>
-              <div className="flex-1 min-w-0 pt-0.5">
-                <div className="flex items-start justify-between gap-4 mb-2">
-                  <h3 className="font-sans font-[500] text-[clamp(16px,1.5vw,19px)] text-ink group-hover:text-teal transition-colors duration-200 leading-snug">
+
+              {/* Content */}
+              <div className="min-w-0">
+                <div className="flex items-center gap-3 mb-1.5">
+                  <h3 className="font-display font-bold text-[clamp(17px,1.6vw,22px)] text-ink group-hover:text-teal transition-colors duration-300 tracking-tight">
                     {s.title}
                   </h3>
-                  <span className="shrink-0 font-mono text-[10px] tracking-[2px] uppercase text-ink-dim bg-canvas2 border border-stroke px-2.5 py-1 rounded-full mt-0.5">
+                  <span className="font-mono text-[9px] tracking-[2px] uppercase text-ink-dim/70 border border-stroke px-2 py-0.5 rounded-sm shrink-0">
                     {s.tag}
                   </span>
                 </div>
-                <p className="font-sans font-[300] text-ink-dim text-[15px] leading-[1.7] max-w-xl">{s.desc}</p>
+                <p className="font-sans text-ink-dim text-[14px] leading-[1.7] max-w-lg">{s.desc}</p>
               </div>
-              <div className="shrink-0 w-10 h-10 rounded-xl bg-canvas2 border border-stroke flex items-center justify-center text-ink-dim group-hover:bg-teal-bg group-hover:border-teal/30 group-hover:text-teal transition-all duration-300 mt-0.5">
-                <s.Icon className="w-4 h-4" strokeWidth={1.5} />
+
+              {/* Icon / arrow */}
+              <div className="shrink-0 w-10 h-10 rounded-md bg-canvas border border-stroke flex items-center justify-center text-ink-dim/40 group-hover:bg-teal group-hover:border-teal group-hover:text-white transition-all duration-300 mt-1">
+                <ArrowUpRight className="w-4 h-4" strokeWidth={2} />
               </div>
             </motion.div>
           ))}
