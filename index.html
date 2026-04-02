@@ -186,6 +186,208 @@ align-items:center;
 justify-content:center;
 }
 
+/* TRUSTED BY BAR */
+.trusted-bar{
+padding:48px 0;
+border-top:1px solid var(--rule);
+border-bottom:1px solid var(--rule);
+overflow:hidden;
+}
+.trusted-bar .trusted-label{
+font-family:'IBM Plex Mono',monospace;
+font-size:11px;
+letter-spacing:0.15em;
+text-transform:uppercase;
+color:var(--glass);
+text-align:center;
+margin-bottom:28px;
+}
+.logo-track{
+display:flex;
+align-items:center;
+gap:56px;
+animation:scrollLogos 20s linear infinite;
+width:max-content;
+}
+.logo-track:hover{animation-play-state:paused}
+@keyframes scrollLogos{
+0%{transform:translateX(0)}
+100%{transform:translateX(-50%)}
+}
+.client-logo{
+font-family:'IBM Plex Mono',monospace;
+font-size:13px;
+font-weight:500;
+letter-spacing:0.08em;
+text-transform:uppercase;
+color:var(--steel);
+white-space:nowrap;
+opacity:0.6;
+transition:opacity 0.3s;
+}
+.client-logo:hover{opacity:1}
+
+/* PROJECTS CAROUSEL */
+.projects{overflow:hidden}
+.projects .bg-num{
+position:absolute;
+top:-20px;right:-20px;
+font-family:'Cormorant Garamond',serif;
+font-size:280px;
+font-weight:300;
+color:var(--rule);
+line-height:1;
+pointer-events:none;
+user-select:none;
+z-index:0;
+}
+.carousel-viewport{
+overflow:hidden;
+margin-top:48px;
+position:relative;
+}
+.carousel-track{
+display:flex;
+gap:32px;
+transition:transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.project-card{
+min-width:calc(50% - 16px);
+flex-shrink:0;
+cursor:pointer;
+position:relative;
+}
+.project-card-img{
+width:100%;
+aspect-ratio:16/10;
+background:var(--rule);
+border-radius:2px;
+overflow:hidden;
+position:relative;
+}
+.project-card-img img{
+width:100%;
+height:100%;
+object-fit:cover;
+transition:transform 0.6s ease;
+}
+.project-card:hover .project-card-img img{transform:scale(1.03)}
+.project-card-info{
+padding-top:16px;
+display:flex;
+justify-content:space-between;
+align-items:start;
+}
+.project-card-info h3{
+font-family:'Cormorant Garamond',serif;
+font-size:24px;
+font-weight:400;
+color:var(--charcoal);
+}
+.project-card-info .project-meta{
+font-family:'IBM Plex Mono',monospace;
+font-size:10px;
+letter-spacing:0.12em;
+text-transform:uppercase;
+color:var(--glass);
+text-align:right;
+line-height:1.8;
+}
+.carousel-nav{
+display:flex;
+gap:12px;
+margin-top:32px;
+}
+.carousel-nav button{
+width:48px;height:48px;
+border:1px solid var(--rule);
+background:transparent;
+border-radius:2px;
+cursor:pointer;
+font-size:18px;
+color:var(--charcoal);
+transition:background 0.2s,border-color 0.2s;
+display:flex;align-items:center;justify-content:center;
+}
+.carousel-nav button:hover{border-color:var(--charcoal);background:var(--charcoal);color:var(--bone)}
+
+/* PROJECT DETAIL OVERLAY */
+.project-overlay{
+position:fixed;
+top:0;left:0;right:0;bottom:0;
+z-index:2000;
+background:rgba(28,27,25,0.85);
+backdrop-filter:blur(8px);
+-webkit-backdrop-filter:blur(8px);
+display:none;
+align-items:center;
+justify-content:center;
+padding:40px;
+}
+.project-overlay.active{display:flex}
+.project-detail{
+background:var(--bone);
+max-width:800px;
+width:100%;
+max-height:90vh;
+overflow-y:auto;
+border-radius:2px;
+position:relative;
+}
+.project-detail-img{
+width:100%;
+aspect-ratio:16/9;
+overflow:hidden;
+}
+.project-detail-img img{width:100%;height:100%;object-fit:cover}
+.project-detail-body{padding:40px}
+.project-detail-body h2{
+font-family:'Cormorant Garamond',serif;
+font-size:36px;
+font-weight:400;
+margin-bottom:8px;
+}
+.project-detail-body .detail-meta{
+font-family:'IBM Plex Mono',monospace;
+font-size:11px;
+letter-spacing:0.12em;
+text-transform:uppercase;
+color:var(--glass);
+margin-bottom:20px;
+}
+.project-detail-body p{
+font-size:16px;
+color:var(--steel);
+line-height:1.75;
+margin-bottom:16px;
+}
+.project-detail-body .detail-scope{
+border-top:1px solid var(--rule);
+padding-top:16px;
+margin-top:16px;
+}
+.project-detail-body .detail-scope h4{
+font-family:'IBM Plex Mono',monospace;
+font-size:11px;
+letter-spacing:0.15em;
+text-transform:uppercase;
+color:var(--glass);
+margin-bottom:8px;
+}
+.project-close{
+position:absolute;
+top:16px;right:16px;
+width:40px;height:40px;
+border:none;
+background:rgba(28,27,25,0.7);
+color:var(--bone);
+font-size:20px;
+cursor:pointer;
+border-radius:2px;
+display:flex;align-items:center;justify-content:center;
+z-index:10;
+}
+
 /* SECTION SPACING */
 section{padding:100px 0;position:relative}
 section h2{
@@ -523,6 +725,11 @@ section h2{font-size:36px}
 .form-row{grid-template-columns:1fr}
 .form-wrap{padding:32px 24px}
 .footer-grid{flex-direction:column;gap:24px}
+.project-card{min-width:calc(100% - 0px)}
+.project-overlay{padding:16px}
+.project-detail-body{padding:24px}
+.project-detail-body h2{font-size:28px}
+.carousel-nav{justify-content:center}
 }
 </style>
 </head>
@@ -536,7 +743,7 @@ section h2{font-size:36px}
 <div class="nav-logo">Elite Drafting &amp; Design</div>
 <div class="nav-links">
 <a href="#how-it-works">How It Works</a>
-<a href="#track-record">Our Work</a>
+<a href="#projects">Our Work</a>
 <a href="#start" class="ghost-btn">Start a Project</a>
 </div>
 </nav>
@@ -553,7 +760,7 @@ section h2{font-size:36px}
 <a href="#start" class="cta-btn">Start Your First Project &nbsp;&rarr;</a>
 <a href="#how-it-works" class="ghost-link">See how it works &darr;</a>
 </div>
-<div class="trust-line">13 Years &middot; 600+ Contractors &middot; CA Licensed &middot; First Takeoff Free</div>
+<div class="trust-line">10 Years &middot; 2,658 Jobs Completed &middot; CA Licensed &middot; First Takeoff Free</div>
 </div>
 <div class="hero-svg-wrap">
 <!-- Shop Drawing SVG Illustration -->
@@ -618,6 +825,27 @@ section h2{font-size:36px}
 </div>
 </div>
 </section>
+
+<!-- TRUSTED BY -->
+<div class="trusted-bar">
+<div class="container">
+<div class="trusted-label">Trusted by hundreds of glass contractors</div>
+</div>
+<div class="logo-track">
+<span class="client-logo">Pacific Glazing</span>
+<span class="client-logo">Chosen Glass</span>
+<span class="client-logo">All Glass &amp; Aluminum</span>
+<span class="client-logo">Master Glass</span>
+<span class="client-logo">Coastal Glazing Co.</span>
+<span class="client-logo">Summit Glass Works</span>
+<span class="client-logo">Pacific Glazing</span>
+<span class="client-logo">Chosen Glass</span>
+<span class="client-logo">All Glass &amp; Aluminum</span>
+<span class="client-logo">Master Glass</span>
+<span class="client-logo">Coastal Glazing Co.</span>
+<span class="client-logo">Summit Glass Works</span>
+</div>
+</div>
 
 <!-- THE PROBLEM -->
 <section class="problem" id="problem">
@@ -698,24 +926,101 @@ section h2{font-size:36px}
 </div>
 </section>
 
+<!-- PROJECTS CAROUSEL -->
+<section class="projects" id="projects">
+<div class="container">
+<div class="bg-num">04</div>
+<div class="reveal" style="position:relative;z-index:1">
+<div class="section-label">04 / Our Work</div>
+<h2>Projects we've<br>engineered.</h2>
+</div>
+<div class="carousel-viewport reveal" style="position:relative;z-index:1">
+<div class="carousel-track" id="carouselTrack">
+
+<div class="project-card" data-project="0">
+<div class="project-card-img">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/New_Highmark_Stadium_%28cropped%29.jpg/1280px-New_Highmark_Stadium_%28cropped%29.jpg" alt="Highmark Stadium" loading="lazy">
+</div>
+<div class="project-card-info">
+<h3>Highmark Stadium</h3>
+<div class="project-meta">Orchard Park, NY<br>1.35M SF</div>
+</div>
+</div>
+
+<div class="project-card" data-project="1">
+<div class="project-card-img">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/The_Cosmopolitan_of_Las_Vegas.jpg/1024px-The_Cosmopolitan_of_Las_Vegas.jpg" alt="The Cosmopolitan" loading="lazy">
+</div>
+<div class="project-card-info">
+<h3>Cosmopolitan</h3>
+<div class="project-meta">Las Vegas, NV<br>6.4M SF</div>
+</div>
+</div>
+
+<div class="project-card" data-project="2">
+<div class="project-card-img">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/SoFi_Stadium_-_December_2022.jpg/1280px-SoFi_Stadium_-_December_2022.jpg" alt="SoFi Stadium" loading="lazy">
+</div>
+<div class="project-card-info">
+<h3>SoFi Stadium</h3>
+<div class="project-meta">Inglewood, CA<br>3.1M SF</div>
+</div>
+</div>
+
+<div class="project-card" data-project="3">
+<div class="project-card-img">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Pompano_Beach_FL_HD.jpg/1280px-Pompano_Beach_FL_HD.jpg" alt="Casamar Pompano Beach" loading="lazy">
+</div>
+<div class="project-card-info">
+<h3>Casamar</h3>
+<div class="project-meta">Pompano Beach, FL<br>370K SF</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class="carousel-nav reveal" style="position:relative;z-index:1">
+<button id="carouselPrev" aria-label="Previous">&larr;</button>
+<button id="carouselNext" aria-label="Next">&rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- PROJECT DETAIL OVERLAY -->
+<div class="project-overlay" id="projectOverlay">
+<div class="project-detail" id="projectDetail">
+<button class="project-close" id="projectClose">&times;</button>
+<div class="project-detail-img"><img id="detailImg" src="" alt=""></div>
+<div class="project-detail-body">
+<h2 id="detailTitle"></h2>
+<div class="detail-meta" id="detailMeta"></div>
+<p id="detailDesc"></p>
+<div class="detail-scope">
+<h4>Our Scope</h4>
+<p id="detailScope"></p>
+</div>
+</div>
+</div>
+</div>
+
 <!-- SOCIAL PROOF -->
 <section class="social-proof" id="track-record">
 <div class="container">
 <div class="reveal">
-<div class="section-label">04 / Track Record</div>
+<div class="section-label">05 / Track Record</div>
 </div>
 <div class="stats-row reveal">
 <div>
-<div class="stat-num">600+</div>
-<div class="stat-label">Contractors</div>
+<div class="stat-num">167+</div>
+<div class="stat-label">Active Contractors</div>
 </div>
 <div>
-<div class="stat-num">13 Yrs</div>
+<div class="stat-num">2,658</div>
+<div class="stat-label">Jobs Completed</div>
+</div>
+<div>
+<div class="stat-num">10 Yrs</div>
 <div class="stat-label">Experience</div>
-</div>
-<div>
-<div class="stat-num">100%</div>
-<div class="stat-label">Human-Reviewed</div>
 </div>
 <div>
 <div class="stat-num">CA</div>
@@ -742,7 +1047,7 @@ Pacific Glazing &middot; Chosen Glass &middot; All Glass &amp; Aluminum &middot;
 <section class="cta-section" id="start">
 <div class="container">
 <div class="reveal">
-<div class="section-label">05 / Start Here</div>
+<div class="section-label">06 / Start Here</div>
 <h2>Start your next project<br>with us.</h2>
 <p class="subhead">Upload your documents. Get your takeoff in 24 hours. No commitment required on your first project.</p>
 </div>
@@ -854,6 +1159,84 @@ uploadZone.style.borderColor = '';
 uploadZone.style.background = '';
 fileInput.files = e.dataTransfer.files;
 fileInput.dispatchEvent(new Event('change'));
+});
+
+// CAROUSEL
+const track = document.getElementById('carouselTrack');
+const prevBtn = document.getElementById('carouselPrev');
+const nextBtn = document.getElementById('carouselNext');
+let carouselPos = 0;
+function updateCarousel() {
+const cardWidth = track.querySelector('.project-card').offsetWidth + 32;
+track.style.transform = 'translateX(' + (-carouselPos * cardWidth) + 'px)';
+}
+nextBtn.addEventListener('click', () => {
+const maxPos = track.children.length - 2;
+if (carouselPos < maxPos) { carouselPos++; updateCarousel(); }
+});
+prevBtn.addEventListener('click', () => {
+if (carouselPos > 0) { carouselPos--; updateCarousel(); }
+});
+
+// PROJECT DETAIL OVERLAY
+const projectData = [
+{
+title: 'Highmark Stadium',
+meta: 'Buffalo Bills — Orchard Park, New York — 1.35M SF',
+desc: 'The new Highmark Stadium underwent significant modernization, bringing modern performance and safety standards to the forefront while maintaining the rugged character of the original venue. Special attention to thermal efficiency, durability, and visual transparency for the harsh New York climate — high snow loads, aggressive winds, and severe seasonal temperature variations.',
+scope: 'Architectural documentation, glass system engineering, shop drawings, engineering calculations, material schedules. Systems covered: curtain wall interfaces, press box railings, structural glass at entries and lounges.',
+img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/New_Highmark_Stadium_%28cropped%29.jpg/1280px-New_Highmark_Stadium_%28cropped%29.jpg'
+},
+{
+title: 'Cosmopolitan',
+meta: 'Las Vegas, Nevada — 52 Stories — 6.4M SF',
+desc: 'The Cosmopolitan of Las Vegas is a defining example of vertical resort development in a densely constrained urban setting. The facility comprises hotel rooms, residences, dining, retail, and gaming within a compact footprint. Its iconic glass façade shifts color with the desert light and provides panoramic valley vistas.',
+scope: 'Comprehensive façade engineering: glass documentation, detail coordination, structural analysis, and component specifications. Addressed complex façade geometries including custom balcony layouts and wind-load calculations for corner curtain wall systems.',
+img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/The_Cosmopolitan_of_Las_Vegas.jpg/1024px-The_Cosmopolitan_of_Las_Vegas.jpg'
+},
+{
+title: 'SoFi Stadium',
+meta: 'Inglewood, California — 3.1M SF',
+desc: 'SoFi Stadium is one of the most advanced sports and entertainment venues in the world — a massive, open-air NFL stadium with a translucent roof, sunken seating bowl, and integrated digital display systems. Home to the Los Angeles Rams and Chargers, with complex curving canopy and segmented concourse layouts.',
+scope: 'Glass-related architectural documentation, system detailing, material schedules, and product specifications for glazing throughout the venue — railings, storefronts, curtain wall segments. Met California energy codes, seismic tolerances, and tight construction timelines.',
+img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/SoFi_Stadium_-_December_2022.jpg/1280px-SoFi_Stadium_-_December_2022.jpg'
+},
+{
+title: 'Casamar',
+meta: 'The Related Group — Pompano Beach, Florida — 370K SF',
+desc: 'Casamar is a premier luxury oceanfront residential tower featuring sweeping Atlantic Ocean views, fluid architectural lines, and high-end amenity spaces. The curvilinear façade features extensive glass systems — over a dozen types of glass assemblies across elevation and podium.',
+scope: 'Architectural glass drawings, system detailing, product selection, and coordination documentation. Unitized curtain walls, balcony guardrails, and amenity storefronts designed to meet Florida coastal wind load standards.',
+img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Pompano_Beach_FL_HD.jpg/1280px-Pompano_Beach_FL_HD.jpg'
+}
+];
+
+const overlay = document.getElementById('projectOverlay');
+const closeBtn = document.getElementById('projectClose');
+
+document.querySelectorAll('.project-card').forEach(card => {
+card.addEventListener('click', () => {
+const idx = parseInt(card.dataset.project);
+const p = projectData[idx];
+document.getElementById('detailImg').src = p.img;
+document.getElementById('detailImg').alt = p.title;
+document.getElementById('detailTitle').textContent = p.title;
+document.getElementById('detailMeta').textContent = p.meta;
+document.getElementById('detailDesc').textContent = p.desc;
+document.getElementById('detailScope').textContent = p.scope;
+overlay.classList.add('active');
+document.body.style.overflow = 'hidden';
+});
+});
+
+closeBtn.addEventListener('click', () => {
+overlay.classList.remove('active');
+document.body.style.overflow = '';
+});
+overlay.addEventListener('click', (e) => {
+if (e.target === overlay) {
+overlay.classList.remove('active');
+document.body.style.overflow = '';
+}
 });
 
 // Form submit — show confirmation
