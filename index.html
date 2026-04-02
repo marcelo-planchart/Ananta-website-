@@ -264,11 +264,15 @@ background:var(--rule);
 border-radius:2px;
 overflow:hidden;
 position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 .project-card-img img{
 width:100%;
 height:100%;
 object-fit:cover;
+object-position:center center;
 transition:transform 0.6s ease;
 }
 .project-card:hover .project-card-img img{transform:scale(1.03)}
@@ -564,22 +568,120 @@ max-width:480px;
 margin-left:auto;
 margin-right:auto;
 }
-.form-wrap{
+.google-btn{
+display:inline-flex;
+align-items:center;
+gap:12px;
 background:var(--white);
 border:1px solid var(--rule);
 border-radius:2px;
-padding:48px;
-max-width:640px;
-margin:0 auto;
-text-align:left;
+padding:18px 40px;
+cursor:pointer;
+font-family:'Instrument Sans',sans-serif;
+font-size:16px;
+font-weight:500;
+color:var(--charcoal);
+transition:border-color 0.2s,box-shadow 0.2s;
+margin-bottom:16px;
 }
-.form-row{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
-margin-bottom:20px;
+.google-btn:hover{border-color:var(--charcoal)}
+.google-btn svg{flex-shrink:0}
+.cta-or{
+font-family:'IBM Plex Mono',monospace;
+font-size:11px;
+letter-spacing:0.15em;
+text-transform:uppercase;
+color:var(--glass);
+margin:20px 0;
 }
-.form-group label{
+.cta-email-link{
+font-family:'Instrument Sans',sans-serif;
+font-size:14px;
+color:var(--steel);
+text-decoration:underline;
+cursor:pointer;
+background:none;
+border:none;
+transition:color 0.2s;
+}
+.cta-email-link:hover{color:var(--charcoal)}
+.cta-footer{
+margin-top:24px;
+font-family:'IBM Plex Mono',monospace;
+font-size:10px;
+letter-spacing:0.15em;
+text-transform:uppercase;
+color:var(--glass);
+}
+
+/* WIZARD MODAL */
+.wizard-overlay{
+position:fixed;
+top:0;left:0;right:0;bottom:0;
+z-index:3000;
+background:rgba(28,27,25,0.85);
+backdrop-filter:blur(8px);
+-webkit-backdrop-filter:blur(8px);
+display:none;
+align-items:center;
+justify-content:center;
+padding:40px;
+}
+.wizard-overlay.active{display:flex}
+.wizard{
+background:var(--bone);
+max-width:560px;
+width:100%;
+border-radius:2px;
+position:relative;
+overflow:hidden;
+}
+.wizard-close{
+position:absolute;
+top:16px;right:16px;
+width:36px;height:36px;
+border:none;
+background:transparent;
+color:var(--charcoal);
+font-size:20px;
+cursor:pointer;
+display:flex;align-items:center;justify-content:center;
+z-index:10;
+}
+.wizard-close:hover{color:var(--steel)}
+.wizard-progress{
+display:flex;
+gap:4px;
+padding:24px 40px 0;
+}
+.wizard-progress-dot{
+height:3px;
+flex:1;
+background:var(--rule);
+border-radius:2px;
+transition:background 0.3s;
+}
+.wizard-progress-dot.active{background:var(--amber)}
+.wizard-progress-dot.done{background:var(--glass)}
+.wizard-step{
+display:none;
+padding:32px 40px 40px;
+}
+.wizard-step.active{display:block}
+.wizard-step h3{
+font-family:'Cormorant Garamond',serif;
+font-size:28px;
+font-weight:400;
+color:var(--charcoal);
+margin-bottom:8px;
+}
+.wizard-step .step-desc{
+font-size:14px;
+color:var(--steel);
+margin-bottom:24px;
+}
+.wizard-field{margin-bottom:16px}
+.wizard-field label{
 display:block;
 font-family:'Instrument Sans',sans-serif;
 font-size:13px;
@@ -587,7 +689,7 @@ font-weight:500;
 color:var(--charcoal);
 margin-bottom:6px;
 }
-.form-group input{
+.wizard-field input,.wizard-field select,.wizard-field textarea{
 width:100%;
 padding:12px 16px;
 border:1px solid var(--rule);
@@ -595,74 +697,83 @@ border-radius:2px;
 font-family:'Instrument Sans',sans-serif;
 font-size:15px;
 color:var(--charcoal);
-background:var(--bone);
+background:var(--white);
 transition:border-color 0.2s;
+resize:vertical;
 }
-.form-group input:focus{outline:none;border-color:var(--glass)}
-.upload-zone{
+.wizard-field input:focus,.wizard-field select:focus,.wizard-field textarea:focus{outline:none;border-color:var(--glass)}
+.wizard-upload{
 border:1px dashed var(--glass);
 border-radius:2px;
-padding:36px;
+padding:32px;
 text-align:center;
-margin-bottom:24px;
 cursor:pointer;
 transition:border-color 0.2s,background 0.2s;
+margin-bottom:16px;
 }
-.upload-zone:hover{background:rgba(143,168,154,0.05);border-color:var(--steel)}
-.upload-zone .upload-label{
+.wizard-upload:hover{background:rgba(143,168,154,0.05);border-color:var(--steel)}
+.wizard-upload .upl-label{
 font-family:'IBM Plex Mono',monospace;
 font-size:12px;
 font-weight:500;
 letter-spacing:0.15em;
 text-transform:uppercase;
 color:var(--charcoal);
-margin-bottom:8px;
+margin-bottom:6px;
 }
-.upload-zone .upload-hint{
+.wizard-upload .upl-hint{
 font-family:'IBM Plex Mono',monospace;
 font-size:11px;
 color:var(--glass);
 }
-.submit-btn{
-width:100%;
-padding:16px;
+.wizard-nav{
+display:flex;
+gap:12px;
+margin-top:24px;
+}
+.wizard-nav .wiz-back{
+padding:14px 24px;
+border:1px solid var(--rule);
+background:transparent;
+border-radius:2px;
+font-family:'Instrument Sans',sans-serif;
+font-size:13px;
+font-weight:500;
+color:var(--charcoal);
+cursor:pointer;
+transition:border-color 0.2s;
+}
+.wizard-nav .wiz-back:hover{border-color:var(--charcoal)}
+.wizard-nav .wiz-next{
+flex:1;
+padding:14px 24px;
 background:var(--amber);
 color:var(--white);
-font-family:'Instrument Sans',sans-serif;
-font-size:14px;
-font-weight:500;
-letter-spacing:0.08em;
 border:none;
 border-radius:2px;
+font-family:'Instrument Sans',sans-serif;
+font-size:13px;
+font-weight:500;
+letter-spacing:0.08em;
 cursor:pointer;
 transition:background 0.2s;
 text-transform:uppercase;
 }
-.submit-btn:hover{background:#a86a2e}
-.form-footer{
+.wizard-nav .wiz-next:hover{background:#a86a2e}
+.wizard-done{
 text-align:center;
-margin-top:16px;
-font-family:'IBM Plex Mono',monospace;
-font-size:10px;
-letter-spacing:0.15em;
-text-transform:uppercase;
-color:var(--glass);
+padding:48px 40px;
+display:none;
 }
-.form-confirmation{
-text-align:center;
-padding:60px 20px;
-}
-.form-confirmation h3{
+.wizard-done.active{display:block}
+.wizard-done h3{
 font-family:'Cormorant Garamond',serif;
-font-size:36px;
+font-size:32px;
 font-weight:400;
 color:var(--charcoal);
 margin-bottom:12px;
 }
-.form-confirmation p{
-font-size:16px;
-color:var(--steel);
-}
+.wizard-done p{font-size:16px;color:var(--steel)}
 
 /* FOOTER */
 footer{
@@ -722,8 +833,8 @@ section h2{font-size:36px}
 .why-us-grid{grid-template-columns:1fr;gap:40px}
 .stats-row{grid-template-columns:repeat(2,1fr);gap:24px}
 .testimonials{grid-template-columns:1fr;gap:32px}
-.form-row{grid-template-columns:1fr}
-.form-wrap{padding:32px 24px}
+.wizard{max-width:100%;margin:0 16px}
+.wizard-step{padding:24px 24px 32px}
 .footer-grid{flex-direction:column;gap:24px}
 .project-card{min-width:calc(100% - 0px)}
 .project-overlay{padding:16px}
@@ -1043,47 +1154,121 @@ Pacific Glazing &middot; Chosen Glass &middot; All Glass &amp; Aluminum &middot;
 </div>
 </section>
 
-<!-- CTA / FORM -->
+<!-- CTA -->
 <section class="cta-section" id="start">
 <div class="container">
 <div class="reveal">
 <div class="section-label">06 / Start Here</div>
 <h2>Start your next project<br>with us.</h2>
-<p class="subhead">Upload your documents. Get your takeoff in 24 hours. No commitment required on your first project.</p>
+<p class="subhead">Create your account in seconds. Then walk through a quick project setup — upload docs, tell us what you need, and we'll get your takeoff back within 24 hours.</p>
 </div>
-<div class="form-wrap reveal" id="formWrap">
-<form id="projectForm">
-<div class="form-row">
-<div class="form-group">
-<label for="name">Name</label>
-<input type="text" id="name" name="name" required>
-</div>
-<div class="form-group">
-<label for="company">Company</label>
-<input type="text" id="company" name="company" required>
-</div>
-</div>
-<div class="form-row">
-<div class="form-group">
-<label for="email">Email</label>
-<input type="email" id="email" name="email" required>
-</div>
-<div class="form-group">
-<label for="phone">Phone <span style="color:var(--glass);font-weight:400">(optional)</span></label>
-<input type="tel" id="phone" name="phone">
-</div>
-</div>
-<div class="upload-zone" id="uploadZone">
-<div class="upload-label">Upload Project Documents</div>
-<div class="upload-hint">PDF &middot; DWG &middot; ZIP &middot; Any format your GC gave you</div>
-<input type="file" id="fileInput" multiple style="display:none" accept=".pdf,.dwg,.zip,.rvt,.dxf">
-</div>
-<button type="submit" class="submit-btn">Submit Project &nbsp;&rarr;</button>
-</form>
-<div class="form-footer">No Credit Card &middot; No Contract &middot; First Takeoff Free</div>
+<div class="reveal">
+<button class="google-btn" id="googleSignIn">
+<svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59a14.5 14.5 0 0 1 0-9.18l-7.98-6.19a24.0 24.0 0 0 0 0 21.56l7.98-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+Continue with Google
+</button>
+<div class="cta-or">or</div>
+<button class="cta-email-link" id="emailSignUp">Sign up with email</button>
+<div class="cta-footer">No Credit Card &middot; No Contract &middot; First Takeoff Free</div>
 </div>
 </div>
 </section>
+
+<!-- WIZARD MODAL -->
+<div class="wizard-overlay" id="wizardOverlay">
+<div class="wizard">
+<button class="wizard-close" id="wizardClose">&times;</button>
+<div class="wizard-progress">
+<div class="wizard-progress-dot active" data-step="0"></div>
+<div class="wizard-progress-dot" data-step="1"></div>
+<div class="wizard-progress-dot" data-step="2"></div>
+</div>
+
+<!-- Step 1: Your Info -->
+<div class="wizard-step active" data-step="0">
+<h3>Your details</h3>
+<p class="step-desc">Tell us who you are so we can send back your takeoff.</p>
+<div class="wizard-field">
+<label for="wiz-name">Full Name</label>
+<input type="text" id="wiz-name" placeholder="John Smith">
+</div>
+<div class="wizard-field">
+<label for="wiz-company">Company</label>
+<input type="text" id="wiz-company" placeholder="Your glazing company">
+</div>
+<div class="wizard-field">
+<label for="wiz-email">Email</label>
+<input type="email" id="wiz-email" placeholder="john@company.com">
+</div>
+<div class="wizard-field">
+<label for="wiz-phone">Phone <span style="color:var(--glass);font-weight:400">(optional)</span></label>
+<input type="tel" id="wiz-phone" placeholder="(555) 000-0000">
+</div>
+<div class="wizard-nav">
+<button class="wiz-next" id="wizNext0">Continue &rarr;</button>
+</div>
+</div>
+
+<!-- Step 2: Project Details -->
+<div class="wizard-step" data-step="1">
+<h3>About your project</h3>
+<p class="step-desc">A few details help us deliver a more accurate takeoff.</p>
+<div class="wizard-field">
+<label for="wiz-project">Project Name</label>
+<input type="text" id="wiz-project" placeholder="e.g. Main St Office Tower">
+</div>
+<div class="wizard-field">
+<label for="wiz-location">Project Location</label>
+<input type="text" id="wiz-location" placeholder="City, State">
+</div>
+<div class="wizard-field">
+<label for="wiz-service">What do you need?</label>
+<select id="wiz-service">
+<option value="">Select a service</option>
+<option>Takeoff only</option>
+<option>Takeoff + Shop Drawings</option>
+<option>Full package (Takeoff + Drawings + Engineering)</option>
+<option>Not sure yet — just get me the takeoff</option>
+</select>
+</div>
+<div class="wizard-field">
+<label for="wiz-notes">Notes <span style="color:var(--glass);font-weight:400">(optional)</span></label>
+<textarea id="wiz-notes" rows="3" placeholder="Anything we should know — deadline, scope, etc."></textarea>
+</div>
+<div class="wizard-nav">
+<button class="wiz-back" id="wizBack1">&larr; Back</button>
+<button class="wiz-next" id="wizNext1">Continue &rarr;</button>
+</div>
+</div>
+
+<!-- Step 3: Upload -->
+<div class="wizard-step" data-step="2">
+<h3>Upload your files</h3>
+<p class="step-desc">Drop your project documents here. Any format works.</p>
+<div class="wizard-upload" id="wizUploadZone">
+<div class="upl-label">Upload Project Documents</div>
+<div class="upl-hint">PDF &middot; DWG &middot; ZIP &middot; Any format your GC gave you</div>
+<input type="file" id="wizFileInput" multiple style="display:none" accept=".pdf,.dwg,.zip,.rvt,.dxf">
+</div>
+<div class="wizard-field">
+<p style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--glass);text-align:center">No files? No problem — you can email them later.</p>
+</div>
+<div class="wizard-nav">
+<button class="wiz-back" id="wizBack2">&larr; Back</button>
+<button class="wiz-next" id="wizSubmit">Submit Project &rarr;</button>
+</div>
+</div>
+
+<!-- Done -->
+<div class="wizard-done" id="wizardDone">
+<h3>Project received.</h3>
+<p>We'll review your documents and get back to you<br>within 24 hours with your takeoff and quote.</p>
+<div style="margin-top:24px">
+<button class="wiz-next" style="width:auto;padding:14px 32px" id="wizDoneClose">Done</button>
+</div>
+</div>
+</div>
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -1131,34 +1316,68 @@ observer.unobserve(entry.target);
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// Upload zone click
-const uploadZone = document.getElementById('uploadZone');
-const fileInput = document.getElementById('fileInput');
-uploadZone.addEventListener('click', () => fileInput.click());
-fileInput.addEventListener('change', () => {
-const count = fileInput.files.length;
-if (count > 0) {
-uploadZone.querySelector('.upload-label').textContent = count + ' file' + (count > 1 ? 's' : '') + ' selected';
-uploadZone.querySelector('.upload-hint').textContent = Array.from(fileInput.files).map(f => f.name).join(', ');
+// WIZARD
+const wizOverlay = document.getElementById('wizardOverlay');
+const wizSteps = document.querySelectorAll('.wizard-step');
+const wizDots = document.querySelectorAll('.wizard-progress-dot');
+const wizDone = document.getElementById('wizardDone');
+let wizCurrent = 0;
+
+function openWizard() {
+wizOverlay.classList.add('active');
+document.body.style.overflow = 'hidden';
+showWizStep(0);
+}
+function closeWizard() {
+wizOverlay.classList.remove('active');
+document.body.style.overflow = '';
+}
+function showWizStep(n) {
+wizCurrent = n;
+wizSteps.forEach((s, i) => s.classList.toggle('active', i === n));
+wizDots.forEach((d, i) => {
+d.classList.remove('active', 'done');
+if (i < n) d.classList.add('done');
+if (i === n) d.classList.add('active');
+});
+wizDone.classList.remove('active');
+document.querySelector('.wizard-progress').style.display = '';
+}
+
+document.getElementById('googleSignIn').addEventListener('click', openWizard);
+document.getElementById('emailSignUp').addEventListener('click', openWizard);
+document.getElementById('wizardClose').addEventListener('click', closeWizard);
+wizOverlay.addEventListener('click', (e) => { if (e.target === wizOverlay) closeWizard(); });
+
+document.getElementById('wizNext0').addEventListener('click', () => showWizStep(1));
+document.getElementById('wizBack1').addEventListener('click', () => showWizStep(0));
+document.getElementById('wizNext1').addEventListener('click', () => showWizStep(2));
+document.getElementById('wizBack2').addEventListener('click', () => showWizStep(1));
+document.getElementById('wizSubmit').addEventListener('click', () => {
+wizSteps.forEach(s => s.classList.remove('active'));
+document.querySelector('.wizard-progress').style.display = 'none';
+wizDone.classList.add('active');
+});
+document.getElementById('wizDoneClose').addEventListener('click', closeWizard);
+
+// Wizard file upload
+const wizUpZone = document.getElementById('wizUploadZone');
+const wizFileInput = document.getElementById('wizFileInput');
+wizUpZone.addEventListener('click', () => wizFileInput.click());
+wizFileInput.addEventListener('change', () => {
+const c = wizFileInput.files.length;
+if (c > 0) {
+wizUpZone.querySelector('.upl-label').textContent = c + ' file' + (c > 1 ? 's' : '') + ' selected';
+wizUpZone.querySelector('.upl-hint').textContent = Array.from(wizFileInput.files).map(f => f.name).join(', ');
 }
 });
-
-// Drag and drop
-uploadZone.addEventListener('dragover', (e) => {
+wizUpZone.addEventListener('dragover', (e) => { e.preventDefault(); wizUpZone.style.borderColor = 'var(--steel)'; });
+wizUpZone.addEventListener('dragleave', () => { wizUpZone.style.borderColor = ''; });
+wizUpZone.addEventListener('drop', (e) => {
 e.preventDefault();
-uploadZone.style.borderColor = 'var(--steel)';
-uploadZone.style.background = 'rgba(143,168,154,0.05)';
-});
-uploadZone.addEventListener('dragleave', () => {
-uploadZone.style.borderColor = '';
-uploadZone.style.background = '';
-});
-uploadZone.addEventListener('drop', (e) => {
-e.preventDefault();
-uploadZone.style.borderColor = '';
-uploadZone.style.background = '';
-fileInput.files = e.dataTransfer.files;
-fileInput.dispatchEvent(new Event('change'));
+wizUpZone.style.borderColor = '';
+wizFileInput.files = e.dataTransfer.files;
+wizFileInput.dispatchEvent(new Event('change'));
 });
 
 // CAROUSEL
@@ -1239,12 +1458,6 @@ document.body.style.overflow = '';
 }
 });
 
-// Form submit — show confirmation
-document.getElementById('projectForm').addEventListener('submit', (e) => {
-e.preventDefault();
-const wrap = document.getElementById('formWrap');
-wrap.innerHTML = '<div class="form-confirmation"><h3>Project received.</h3><p>We\'ll review your documents and get back to you within 24 hours with your takeoff and quote.</p></div>';
-});
 </script>
 </body>
 </html>
