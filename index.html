@@ -136,10 +136,11 @@ z-index:0;
 }
 .hero .container{position:relative;z-index:1}
 .hero-grid{
-display:block;
+display:flex;
+justify-content:flex-end;
 width:100%;
-max-width:640px;
 }
+.hero-stagger{max-width:600px}
 .hero-svg-wrap{
 display:none;
 }
@@ -1166,12 +1167,20 @@ nav{padding:16px 24px}
 .container{padding:0 24px}
 section{padding:80px 0}
 .hero{min-height:100svh;padding:140px 0 60px}
+.hero-grid{display:block}
+.hero-stagger{max-width:100%}
 .hero h1{font-size:44px;margin-bottom:20px}
 .hero-body{font-size:15px;margin-bottom:28px}
 .trust-line{margin-top:32px;font-size:9px}
 .cta-btn{padding:14px 28px;font-size:13px}
 .ghost-link{font-size:12px;margin-left:16px}
 .hero::before{
+background-image:url('https://arquitectonica.com/architecture/wp-content/uploads/sites/2/2018/07/Cosmopolitan_Resort_and_Casino_3-1920x1080.jpg') !important;
+transform:none !important;
+}
+.hero::after{
+background:linear-gradient(to bottom,rgba(10,10,10,0.55),rgba(10,10,10,0.35) 50%,rgba(10,10,10,0.7)) !important;
+}
 content:'';
 position:absolute;
 top:0;left:0;right:0;bottom:0;
