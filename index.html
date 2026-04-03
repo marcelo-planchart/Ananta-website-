@@ -118,6 +118,22 @@ position:relative;
 background:var(--charcoal);
 overflow:hidden;
 }
+.hero::before{
+content:'';
+position:absolute;
+top:0;left:0;right:0;bottom:0;
+background:url('https://relatedgroup.com/wp-content/uploads/2022/02/900_Ocean_01_Dawn.jpg') center center/cover no-repeat;
+opacity:0.3;
+z-index:0;
+}
+.hero::after{
+content:'';
+position:absolute;
+top:0;left:0;right:0;bottom:0;
+background:linear-gradient(to right,rgba(10,10,10,0.85) 45%,rgba(10,10,10,0.3)),linear-gradient(to top,rgba(10,10,10,0.7),transparent 50%);
+z-index:0;
+}
+.hero .container{position:relative;z-index:1}
 .hero-grid{
 display:grid;
 grid-template-columns:1fr 0.5fr;
@@ -126,10 +142,7 @@ align-items:center;
 width:100%;
 }
 .hero-svg-wrap{
-display:flex;
-align-items:center;
-justify-content:center;
-opacity:0.25;
+display:none;
 }
 .hero h1{
 font-family:'Space Grotesk',sans-serif;
@@ -180,7 +193,7 @@ font-family:'IBM Plex Mono',monospace;
 font-size:11px;
 letter-spacing:0.2em;
 text-transform:uppercase;
-color:rgba(255,255,255,0.3);
+color:rgba(255,255,255,0.5);
 }
 /* removed — now handled in .hero-grid above */
 
