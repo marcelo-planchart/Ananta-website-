@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Team — Elite Drafting &amp; Design</title>
+<meta name="description" content="Meet the team behind Elite Drafting & Design. Engineers, designers, and builders who help glazing contractors win more business.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bone:#F7F5F0;
+--charcoal:#0A0A0A;
+--steel:#888;
+--glass:#8FA89A;
+--amber:#C17F3A;
+--white:#FFFFFF;
+}
+html{scroll-behavior:smooth}
+body{
+background:var(--bone);
+color:var(--charcoal);
+font-family:'Instrument Sans',sans-serif;
+font-weight:400;
+font-size:18px;
+line-height:1.7;
+-webkit-font-smoothing:antialiased;
+}
+.container{max-width:1280px;margin:0 auto;padding:0 56px}
+
+/* NAV */
+nav{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:24px 48px;
+border-bottom:1px solid rgba(0,0,0,0.06);
+}
+.nav-logo{
+font-family:'IBM Plex Mono',monospace;
+font-size:12px;
+font-weight:500;
+letter-spacing:0.12em;
+color:var(--charcoal);
+text-transform:uppercase;
+text-decoration:none;
+}
+.nav-back{
+font-family:'Instrument Sans',sans-serif;
+font-size:13px;
+font-weight:500;
+color:var(--charcoal);
+text-decoration:none;
+transition:opacity 0.3s;
+}
+.nav-back:hover{opacity:0.5}
+
+/* HERO */
+.team-hero{
+padding:120px 0 80px;
+}
+.team-hero .label{
+font-family:'IBM Plex Mono',monospace;
+font-size:11px;
+font-weight:500;
+letter-spacing:0.2em;
+text-transform:uppercase;
+color:var(--glass);
+margin-bottom:32px;
+}
+.team-hero h1{
+font-family:'Space Grotesk',sans-serif;
+font-size:clamp(40px,5vw,72px);
+font-weight:700;
+letter-spacing:-0.04em;
+line-height:1;
+margin-bottom:24px;
+}
+.team-hero p{
+font-size:18px;
+color:#555;
+max-width:560px;
+line-height:1.8;
+}
+
+/* TEAM GRID */
+.team-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:32px;
+padding-bottom:120px;
+}
+.team-member{
+text-align:center;
+}
+.team-photo{
+width:100%;
+aspect-ratio:3/4;
+background:var(--charcoal);
+border-radius:4px;
+overflow:hidden;
+margin-bottom:20px;
+position:relative;
+}
+.team-photo img{
+width:100%;
+height:100%;
+object-fit:cover;
+filter:grayscale(100%);
+transition:filter 0.5s,transform 0.5s;
+}
+.team-member:hover .team-photo img{
+filter:grayscale(0%);
+transform:scale(1.03);
+}
+.team-name{
+font-family:'Space Grotesk',sans-serif;
+font-size:20px;
+font-weight:600;
+color:var(--charcoal);
+margin-bottom:4px;
+letter-spacing:-0.02em;
+}
+.team-role{
+font-family:'IBM Plex Mono',monospace;
+font-size:11px;
+letter-spacing:0.15em;
+text-transform:uppercase;
+color:var(--steel);
+}
+
+/* FOOTER */
+footer{
+padding:40px 0;
+border-top:1px solid rgba(0,0,0,0.06);
+}
+.footer-bottom{
+font-family:'IBM Plex Mono',monospace;
+font-size:10px;
+letter-spacing:0.2em;
+text-transform:uppercase;
+color:var(--steel);
+}
+
+@media(max-width:768px){
+.container{padding:0 24px}
+nav{padding:16px 24px}
+.team-hero{padding:80px 0 48px}
+.team-grid{grid-template-columns:repeat(2,1fr);gap:20px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+<a href="index.html" class="nav-logo">Elite Drafting &amp; Design</a>
+<a href="index.html" class="nav-back">&larr; Back to Home</a>
+</nav>
+
+<section class="team-hero">
+<div class="container">
+<div class="label">Our Team</div>
+<h1>The people behind<br>every project.</h1>
+<p>Engineers, designers, and builders who've spent a decade helping glazing contractors win more business. We know glass — and we know your deadlines.</p>
+</div>
+</section>
+
+<section>
+<div class="container">
+<div class="team-grid">
+
+<div class="team-member">
+<div class="team-photo">
+<img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=800&fit=crop&crop=face" alt="Mr. Chang">
+</div>
+<div class="team-name">Mr. Chang</div>
+<div class="team-role">Founder &amp; CEO</div>
+</div>
+
+<div class="team-member">
+<div class="team-photo">
+<img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&h=800&fit=crop&crop=face" alt="Silvia">
+</div>
+<div class="team-name">Silvia</div>
+<div class="team-role">Operations Director</div>
+</div>
+
+<div class="team-member">
+<div class="team-photo">
+<img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&crop=face" alt="Enrique">
+</div>
+<div class="team-name">Enrique</div>
+<div class="team-role">Engineering Lead</div>
+</div>
+
+<div class="team-member">
+<div class="team-photo">
+<img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&h=800&fit=crop&crop=face" alt="Marcelo">
+</div>
+<div class="team-name">Marcelo</div>
+<div class="team-role">Technology &amp; Development</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<footer>
+<div class="container">
+<div class="footer-bottom">
+&copy; 2026 Elite Drafting &amp; Design &middot; California Licensed Engineering
+</div>
+</div>
+</footer>
+
+</body>
+</html>
