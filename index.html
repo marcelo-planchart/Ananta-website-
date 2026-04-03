@@ -123,24 +123,22 @@ content:'';
 position:absolute;
 top:0;left:0;right:0;bottom:0;
 background:url('https://relatedgroup.com/wp-content/uploads/2022/02/900_Ocean_01_Dawn.jpg') center center/cover no-repeat;
-opacity:0.6;
+opacity:0.5;
 z-index:0;
-transform:scaleX(-1);
 }
 .hero::after{
 content:'';
 position:absolute;
 top:0;left:0;right:0;bottom:0;
-background:linear-gradient(to right,rgba(10,10,10,0.65) 40%,rgba(10,10,10,0.15)),linear-gradient(to top,rgba(10,10,10,0.5),transparent 50%);
+background:linear-gradient(to right,rgba(10,10,10,0.7) 35%,rgba(10,10,10,0.2)),linear-gradient(to top,rgba(10,10,10,0.6),transparent 50%);
 z-index:0;
 }
 .hero .container{position:relative;z-index:1}
 .hero-grid{
-display:flex;
-justify-content:flex-end;
+display:block;
 width:100%;
+max-width:640px;
 }
-.hero-stagger{max-width:600px}
 .hero-svg-wrap{
 display:none;
 }
@@ -1167,7 +1165,7 @@ nav{padding:16px 24px}
 .container{padding:0 24px}
 section{padding:80px 0}
 .hero{min-height:100svh;padding:140px 0 60px}
-.hero-grid{display:block}
+.hero-grid{display:block;max-width:100%}
 .hero-stagger{max-width:100%}
 .hero h1{font-size:44px;margin-bottom:20px}
 .hero-body{font-size:15px;margin-bottom:28px}
@@ -1181,22 +1179,6 @@ transform:none !important;
 .hero::after{
 background:linear-gradient(to bottom,rgba(10,10,10,0.55),rgba(10,10,10,0.35) 50%,rgba(10,10,10,0.7)) !important;
 }
-content:'';
-position:absolute;
-top:0;left:0;right:0;bottom:0;
-background:url('https://arquitectonica.com/architecture/wp-content/uploads/sites/2/2018/07/Cosmopolitan_Resort_and_Casino_2_ft-1920x1080.jpg') center/cover no-repeat;
-opacity:0.25;
-z-index:0;
-}
-.hero::after{
-content:'';
-position:absolute;
-bottom:0;left:0;right:0;height:50%;
-background:linear-gradient(to top,var(--charcoal),transparent);
-z-index:0;
-}
-.hero .container{position:relative;z-index:1}
-.hero-grid{display:block;max-width:100%}
 .hero-svg-wrap{display:none}
 .hero .section-label{display:none}
 .pain-cards{grid-template-columns:1fr;gap:20px}
@@ -1218,6 +1200,10 @@ z-index:0;
 .carousel-nav{justify-content:center}
 .cta-section{padding:100px 0}
 .google-btn{padding:16px 32px;font-size:15px}
+.expertise-grid{grid-template-columns:1fr;gap:16px}
+.expertise{padding:80px 0}
+.project-card-info{padding:20px 24px}
+.project-card-info h3{font-size:22px}
 }
 </style>
 </head>
