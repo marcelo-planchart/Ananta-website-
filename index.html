@@ -226,6 +226,85 @@ transition:opacity 0.4s;
 }
 .client-logo:hover{opacity:1}
 
+/* EXPERTISE */
+.expertise{background:var(--bone);color:var(--charcoal);padding:140px 0}
+.expertise h2{color:var(--charcoal)}
+.expertise-intro{
+font-size:18px;
+color:#555;
+line-height:1.8;
+max-width:640px;
+margin-bottom:72px;
+}
+.expertise-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:24px;
+}
+.exp-card{
+background:var(--white);
+border-radius:6px;
+padding:36px 32px;
+border:1px solid #eee;
+transition:all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+position:relative;
+overflow:hidden;
+}
+.exp-card::before{
+content:'';
+position:absolute;
+top:0;left:0;right:0;
+height:3px;
+background:var(--glass);
+transform:scaleX(0);
+transform-origin:left;
+transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.exp-card:hover::before{transform:scaleX(1)}
+.exp-card:hover{border-color:transparent;box-shadow:0 8px 32px rgba(0,0,0,0.08);transform:translateY(-4px)}
+.exp-card-num{
+font-family:'Space Grotesk',sans-serif;
+font-size:48px;
+font-weight:700;
+color:rgba(10,10,10,0.06);
+line-height:1;
+margin-bottom:16px;
+}
+.exp-card h3{
+font-family:'Space Grotesk',sans-serif;
+font-size:22px;
+font-weight:600;
+color:var(--charcoal);
+margin-bottom:12px;
+letter-spacing:-0.02em;
+line-height:1.3;
+}
+.exp-card p{
+font-size:15px;
+color:#666;
+line-height:1.75;
+}
+.exp-card .exp-tags{
+margin-top:16px;
+display:flex;
+flex-wrap:wrap;
+gap:6px;
+}
+.exp-card .exp-tag{
+font-family:'IBM Plex Mono',monospace;
+font-size:10px;
+letter-spacing:0.1em;
+text-transform:uppercase;
+color:var(--glass);
+background:rgba(143,168,154,0.1);
+padding:4px 10px;
+border-radius:3px;
+}
+@media(max-width:768px){
+.expertise-grid{grid-template-columns:1fr;gap:16px}
+.expertise{padding:80px 0}
+}
+
 /* PROJECTS CAROUSEL */
 .projects{overflow:hidden;background:var(--bone);color:var(--charcoal)}
 .projects .bg-num{display:none}
@@ -1243,12 +1322,92 @@ z-index:0;
 </div>
 </section>
 
+<!-- EXPERTISE -->
+<section class="expertise" id="expertise">
+<div class="container">
+<div class="reveal">
+<div class="section-label">03 / Our Expertise</div>
+<h2>Built to eliminate the work<br>that slows you down.</h2>
+<p class="expertise-intro">We combine 10 years of glazing engineering with AI-powered tools to automate the administrative work that eats into your margins. Less time on paperwork, more time winning and delivering projects.</p>
+</div>
+<div class="expertise-grid">
+
+<div class="exp-card reveal">
+<div class="exp-card-num">01</div>
+<h3>Automated Takeoffs &amp; Shop Drawings</h3>
+<p>Upload your plans and get accurate takeoffs same day. Our AI extracts glass scope from any document — then our engineers verify every detail before it leaves.</p>
+<div class="exp-tags">
+<span class="exp-tag">Takeoffs</span>
+<span class="exp-tag">Shop Drawings</span>
+<span class="exp-tag">Panel Counts</span>
+</div>
+</div>
+
+<div class="exp-card reveal">
+<div class="exp-card-num">02</div>
+<h3>Engineering Stamps &amp; Submittals</h3>
+<p>California-licensed PE on staff. Full engineering calculations, stamped drawings, and GC-ready submittal packages — handled end to end so you never chase an engineer again.</p>
+<div class="exp-tags">
+<span class="exp-tag">PE Stamps</span>
+<span class="exp-tag">Calculations</span>
+<span class="exp-tag">Submittals</span>
+</div>
+</div>
+
+<div class="exp-card reveal">
+<div class="exp-card-num">03</div>
+<h3>Live Project Platform</h3>
+<p>Track every project in one place. See real-time progress, manage revisions, version control your drawings, and collaborate with your team — no more email chains or lost files.</p>
+<div class="exp-tags">
+<span class="exp-tag">Dashboard</span>
+<span class="exp-tag">Revisions</span>
+<span class="exp-tag">Versioning</span>
+</div>
+</div>
+
+<div class="exp-card reveal">
+<div class="exp-card-num">04</div>
+<h3>AI-Powered Scope Detection</h3>
+<p>Our system reads your GC's plan set and automatically identifies every glass-related detail — curtain walls, storefronts, railings, skylights. You get a clean scope before you even start.</p>
+<div class="exp-tags">
+<span class="exp-tag">AI Detection</span>
+<span class="exp-tag">Auto-Scope</span>
+<span class="exp-tag">Plan Parsing</span>
+</div>
+</div>
+
+<div class="exp-card reveal">
+<div class="exp-card-num">05</div>
+<h3>Operations Optimization</h3>
+<p>From bid to install, we help you streamline your entire workflow. Material schedules, procurement coordination, and logistics support — so your projects close faster with fewer headaches.</p>
+<div class="exp-tags">
+<span class="exp-tag">Scheduling</span>
+<span class="exp-tag">Procurement</span>
+<span class="exp-tag">Logistics</span>
+</div>
+</div>
+
+<div class="exp-card reveal">
+<div class="exp-card-num">06</div>
+<h3>Custom Development</h3>
+<p>Need something specific? We build custom tools and integrations for glazing contractors — estimating workflows, ERP connections, and reporting dashboards tailored to how you work.</p>
+<div class="exp-tags">
+<span class="exp-tag">Custom Tools</span>
+<span class="exp-tag">Integrations</span>
+<span class="exp-tag">Dashboards</span>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
 <!-- PROJECTS CAROUSEL -->
 <section class="projects" id="projects">
 <div class="container">
 <div class="bg-num">04</div>
 <div class="reveal" style="position:relative;z-index:1">
-<div class="section-label">03 / Our Work</div>
+<div class="section-label">04 / Our Work</div>
 <h2>Projects we've<br>engineered.</h2>
 </div>
 <div class="carousel-viewport reveal" style="position:relative;z-index:1">
@@ -1365,7 +1524,7 @@ z-index:0;
 <section class="social-proof" id="track-record">
 <div class="container">
 <div class="reveal">
-<div class="section-label">04 / Track Record</div>
+<div class="section-label">05 / Track Record</div>
 </div>
 <div class="stats-row reveal">
 <div>
@@ -1405,7 +1564,7 @@ Pacific Glazing &middot; Chosen Glass &middot; All Glass &amp; Aluminum &middot;
 <section class="cta-section" id="start">
 <div class="container">
 <div class="reveal">
-<div class="section-label">05 / Start Here</div>
+<div class="section-label">06 / Start Here</div>
 <h2>Start your next project<br>with us.</h2>
 <p class="subhead">Create your account in seconds. Then walk through a quick project setup — upload docs, tell us what you need, and we'll get your takeoff back within 24 hours.</p>
 </div>
