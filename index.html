@@ -118,27 +118,18 @@ position:relative;
 background:var(--charcoal);
 overflow:hidden;
 }
-.hero::before{
-content:'';
-position:absolute;
-top:0;left:0;right:0;bottom:0;
-background:url('https://populous.com/uploads/2022/11/Bills_Exterior_NightColor_1920x1080.jpg') center/cover no-repeat;
-opacity:0.35;
-z-index:0;
-}
-.hero::after{
-content:'';
-position:absolute;
-bottom:0;left:0;right:0;
-height:40%;
-background:linear-gradient(to top,var(--charcoal),transparent);
-z-index:0;
-}
-.hero .container{position:relative;z-index:1}
 .hero-grid{
-display:block;
+display:grid;
+grid-template-columns:1fr 0.5fr;
+gap:80px;
+align-items:center;
 width:100%;
-max-width:720px;
+}
+.hero-svg-wrap{
+display:flex;
+align-items:center;
+justify-content:center;
+opacity:0.25;
 }
 .hero h1{
 font-family:'Space Grotesk',sans-serif;
@@ -191,9 +182,7 @@ letter-spacing:0.2em;
 text-transform:uppercase;
 color:rgba(255,255,255,0.3);
 }
-.hero-svg-wrap{
-display:none;
-}
+/* removed — now handled in .hero-grid above */
 
 /* TRUSTED BY BAR */
 .trusted-bar{
@@ -861,7 +850,24 @@ nav{padding:16px 24px}
 .container{padding:0 24px}
 section{padding:80px 0}
 .hero{min-height:100vh;padding:0}
-.hero-grid{max-width:100%}
+.hero::before{
+content:'';
+position:absolute;
+top:0;left:0;right:0;bottom:0;
+background:url('https://arquitectonica.com/architecture/wp-content/uploads/sites/2/2018/07/Cosmopolitan_Resort_and_Casino_2_ft-1920x1080.jpg') center/cover no-repeat;
+opacity:0.25;
+z-index:0;
+}
+.hero::after{
+content:'';
+position:absolute;
+bottom:0;left:0;right:0;height:50%;
+background:linear-gradient(to top,var(--charcoal),transparent);
+z-index:0;
+}
+.hero .container{position:relative;z-index:1}
+.hero-grid{display:block;max-width:100%}
+.hero-svg-wrap{display:none}
 .pain-cards{grid-template-columns:1fr;gap:20px}
 .step{grid-template-columns:60px 1fr;gap:20px}
 .step .step-num{font-size:32px}
