@@ -799,6 +799,189 @@ margin-bottom:12px;
 }
 .wizard-done p{font-size:16px;color:#888;line-height:1.7}
 
+/* CHAT WIDGET */
+.chat-fab{
+position:fixed;
+bottom:28px;right:28px;
+width:60px;height:60px;
+border-radius:50%;
+background:var(--amber);
+border:none;
+cursor:pointer;
+z-index:4000;
+display:flex;align-items:center;justify-content:center;
+box-shadow:0 4px 20px rgba(0,0,0,0.3);
+transition:transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94),background 0.3s;
+}
+.chat-fab:hover{transform:scale(1.08)}
+.chat-fab svg{transition:transform 0.3s}
+.chat-fab.open svg{transform:rotate(90deg)}
+.chat-window{
+position:fixed;
+bottom:100px;right:28px;
+width:380px;
+max-height:520px;
+background:var(--white);
+border-radius:12px;
+z-index:4000;
+overflow:hidden;
+box-shadow:0 12px 48px rgba(0,0,0,0.25);
+display:flex;
+flex-direction:column;
+opacity:0;
+transform:translateY(16px) scale(0.96);
+pointer-events:none;
+transition:opacity 0.35s cubic-bezier(0.25,0.46,0.45,0.94),transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.chat-window.open{
+opacity:1;
+transform:translateY(0) scale(1);
+pointer-events:auto;
+}
+.chat-header{
+background:var(--charcoal);
+padding:20px 24px;
+display:flex;
+align-items:center;
+gap:12px;
+}
+.chat-avatar{
+width:36px;height:36px;
+border-radius:50%;
+background:var(--amber);
+display:flex;align-items:center;justify-content:center;
+font-family:'Space Grotesk',sans-serif;
+font-size:14px;
+font-weight:600;
+color:var(--white);
+flex-shrink:0;
+}
+.chat-header-info h4{
+font-family:'Space Grotesk',sans-serif;
+font-size:15px;
+font-weight:600;
+color:var(--white);
+margin-bottom:2px;
+}
+.chat-header-info span{
+font-family:'IBM Plex Mono',monospace;
+font-size:10px;
+color:rgba(255,255,255,0.5);
+letter-spacing:0.1em;
+text-transform:uppercase;
+}
+.chat-body{
+flex:1;
+overflow-y:auto;
+padding:20px;
+background:#f9f9f7;
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+.chat-msg{
+max-width:85%;
+padding:12px 16px;
+border-radius:12px 12px 12px 2px;
+font-family:'Instrument Sans',sans-serif;
+font-size:14px;
+line-height:1.6;
+color:var(--charcoal);
+background:var(--white);
+box-shadow:0 1px 3px rgba(0,0,0,0.06);
+animation:chatFade 0.4s ease both;
+}
+.chat-msg.bot{align-self:flex-start}
+.chat-msg.user{
+align-self:flex-end;
+background:var(--charcoal);
+color:var(--white);
+border-radius:12px 12px 2px 12px;
+}
+@keyframes chatFade{
+from{opacity:0;transform:translateY(8px)}
+to{opacity:1;transform:translateY(0)}
+}
+.chat-options{
+display:flex;
+flex-direction:column;
+gap:8px;
+padding:0 20px 20px;
+background:#f9f9f7;
+}
+.chat-option{
+padding:12px 16px;
+background:var(--white);
+border:1px solid #e8e8e5;
+border-radius:8px;
+font-family:'Instrument Sans',sans-serif;
+font-size:14px;
+color:var(--charcoal);
+cursor:pointer;
+text-align:left;
+transition:all 0.25s;
+display:flex;
+align-items:center;
+gap:10px;
+}
+.chat-option:hover{border-color:var(--charcoal);background:#fafaf8}
+.chat-option .opt-icon{
+font-size:16px;
+flex-shrink:0;
+}
+.chat-reply{
+padding:16px 20px;
+background:#f9f9f7;
+display:flex;
+flex-direction:column;
+gap:8px;
+}
+.chat-reply-msg{
+padding:12px 16px;
+border-radius:12px 12px 12px 2px;
+font-family:'Instrument Sans',sans-serif;
+font-size:14px;
+line-height:1.6;
+color:var(--charcoal);
+background:var(--white);
+box-shadow:0 1px 3px rgba(0,0,0,0.06);
+animation:chatFade 0.4s ease both;
+}
+.chat-input-row{
+display:flex;
+gap:8px;
+padding:12px 16px;
+border-top:1px solid #eee;
+background:var(--white);
+}
+.chat-input-row input{
+flex:1;
+border:none;
+font-family:'Instrument Sans',sans-serif;
+font-size:14px;
+color:var(--charcoal);
+background:transparent;
+outline:none;
+}
+.chat-input-row input::placeholder{color:#bbb}
+.chat-input-row button{
+width:36px;height:36px;
+border:none;
+border-radius:50%;
+background:var(--charcoal);
+color:var(--white);
+cursor:pointer;
+display:flex;align-items:center;justify-content:center;
+font-size:16px;
+transition:background 0.2s;
+flex-shrink:0;
+}
+.chat-input-row button:hover{background:#333}
+@media(max-width:768px){
+.chat-window{right:12px;left:12px;bottom:96px;width:auto}
+.chat-fab{bottom:20px;right:20px;width:54px;height:54px}
+}
+
 /* FOOTER */
 footer{
 padding:60px 0 40px;
@@ -1352,6 +1535,47 @@ Continue with Google
 </div>
 </footer>
 
+<!-- CHAT WIDGET -->
+<button class="chat-fab" id="chatFab" aria-label="Open chat">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+</svg>
+</button>
+
+<div class="chat-window" id="chatWindow">
+<div class="chat-header">
+<div class="chat-avatar">S</div>
+<div class="chat-header-info">
+<h4>Sylvia</h4>
+<span>Elite Drafting &amp; Design</span>
+</div>
+</div>
+<div class="chat-body" id="chatBody">
+<div class="chat-msg bot">Welcome to Elite! My name is Sylvia. How can I help you today?</div>
+</div>
+<div class="chat-options" id="chatOptions">
+<button class="chat-option" data-reply="quote">
+<span class="opt-icon">&#9830;</span> I need a quote
+</button>
+<button class="chat-option" data-reply="info">
+<span class="opt-icon">&#9677;</span> I want more info
+</button>
+<button class="chat-option" data-reply="examples">
+<span class="opt-icon">&#9636;</span> I want to see examples
+</button>
+<button class="chat-option" data-reply="rfi">
+<span class="opt-icon">&#9998;</span> Request for information
+</button>
+<button class="chat-option" data-reply="submit">
+<span class="opt-icon">&#8679;</span> I want to submit my documents
+</button>
+</div>
+<div class="chat-input-row">
+<input type="text" id="chatInput" placeholder="Type a message...">
+<button id="chatSend" aria-label="Send">&#8593;</button>
+</div>
+</div>
+
 <script>
 // Hero stagger reveal on load
 requestAnimationFrame(() => {
@@ -1545,6 +1769,93 @@ overlay.classList.remove('active');
 document.body.style.overflow = '';
 }
 });
+
+// CHAT WIDGET
+const chatFab = document.getElementById('chatFab');
+const chatWindow = document.getElementById('chatWindow');
+const chatBody = document.getElementById('chatBody');
+const chatOptions = document.getElementById('chatOptions');
+const chatInput = document.getElementById('chatInput');
+const chatSend = document.getElementById('chatSend');
+
+chatFab.addEventListener('click', () => {
+chatFab.classList.toggle('open');
+chatWindow.classList.toggle('open');
+if (chatWindow.classList.contains('open')) chatInput.focus();
+});
+
+const replies = {
+quote: {
+user: 'I need a quote',
+bot: 'Great! I can help with that. To get you an accurate quote, we\'ll need your project documents — plans, specs, or whatever your GC sent you. Want me to walk you through our quick upload process?',
+followUp: 'You can also email them directly to hello@elitedraftingdesign.com and we\'ll have a quote back to you within 24 hours.'
+},
+info: {
+user: 'I want more info',
+bot: 'Of course! Elite Drafting & Design provides shop drawings, engineering stamps, and takeoff services for glazing contractors. We\'ve completed over 2,658 jobs with 167+ active contractors.',
+followUp: 'Our California-licensed PE handles everything from takeoff to full submittal packages. What specifically would you like to know more about?'
+},
+examples: {
+user: 'I want to see examples',
+bot: 'We\'ve worked on some incredible projects — Highmark Stadium in Buffalo, SoFi Stadium in LA, The Cosmopolitan in Las Vegas, and Casamar in Pompano Beach, among many others.',
+followUp: 'Scroll down to our "Our Work" section to see project details, or I can tell you more about any specific project. Which one interests you?'
+},
+rfi: {
+user: 'Request for information',
+bot: 'Happy to provide any information you need. We offer three main services: takeoffs (free for your first project), shop drawings, and full engineering stamp packages.',
+followUp: 'All work is reviewed by our California-licensed PE. Turnaround is typically 24 hours for takeoffs and 3-5 days for shop drawings. What would you like to know?'
+},
+submit: {
+user: 'I want to submit my documents',
+bot: 'Perfect — let\'s get your project started! You can upload your documents right now through our quick signup process.',
+followUp: 'Click the button below or scroll to "Start Here" on the page. First takeoff is on us — no commitment required.',
+action: true
+}
+};
+
+function addMsg(text, type, delay) {
+return new Promise(resolve => {
+setTimeout(() => {
+const msg = document.createElement('div');
+msg.className = 'chat-msg ' + type;
+msg.textContent = text;
+chatBody.appendChild(msg);
+chatBody.scrollTop = chatBody.scrollHeight;
+resolve();
+}, delay || 0);
+});
+}
+
+document.querySelectorAll('.chat-option').forEach(btn => {
+btn.addEventListener('click', async () => {
+const key = btn.dataset.reply;
+const r = replies[key];
+chatOptions.style.display = 'none';
+await addMsg(r.user, 'user', 0);
+await addMsg(r.bot, 'bot', 600);
+if (r.followUp) await addMsg(r.followUp, 'bot', 1200);
+if (r.action) {
+setTimeout(() => {
+const link = document.createElement('div');
+link.className = 'chat-msg bot';
+link.innerHTML = '<a href="#start" style="color:var(--amber);font-weight:600;text-decoration:underline" onclick="document.getElementById(\'chatFab\').click()">Start Your Project &rarr;</a>';
+chatBody.appendChild(link);
+chatBody.scrollTop = chatBody.scrollHeight;
+}, 1800);
+}
+});
+});
+
+function sendUserMsg() {
+const text = chatInput.value.trim();
+if (!text) return;
+chatInput.value = '';
+chatOptions.style.display = 'none';
+addMsg(text, 'user', 0);
+addMsg('Thanks for your message! A team member will get back to you shortly. In the meantime, feel free to explore our projects or start uploading your documents.', 'bot', 800);
+}
+chatSend.addEventListener('click', sendUserMsg);
+chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendUserMsg(); });
 
 </script>
 </body>
