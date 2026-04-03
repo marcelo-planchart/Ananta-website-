@@ -306,7 +306,7 @@ border-radius:3px;
 }
 
 /* PROJECTS CAROUSEL */
-.projects{overflow:hidden;background:var(--bone);color:var(--charcoal)}
+.projects{overflow:hidden;background:var(--bone);color:var(--charcoal);padding-bottom:140px}
 .projects .bg-num{display:none}
 .carousel-viewport{
 overflow:hidden;
@@ -315,11 +315,11 @@ position:relative;
 }
 .carousel-track{
 display:flex;
-gap:24px;
-transition:transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+gap:0;
+transition:transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
 }
 .project-card{
-min-width:calc(50% - 12px);
+min-width:100%;
 flex-shrink:0;
 cursor:pointer;
 position:relative;
@@ -328,7 +328,7 @@ position:relative;
 width:100%;
 aspect-ratio:16/9;
 background:var(--charcoal);
-border-radius:4px;
+border-radius:0;
 overflow:hidden;
 position:relative;
 }
@@ -336,31 +336,33 @@ position:relative;
 content:'';
 position:absolute;
 bottom:0;left:0;right:0;
-height:50%;
-background:linear-gradient(to top,rgba(0,0,0,0.5),transparent);
-opacity:0;
-transition:opacity 0.4s;
+height:60%;
+background:linear-gradient(to top,rgba(0,0,0,0.7),transparent);
+z-index:1;
 }
-.project-card:hover .project-card-img::after{opacity:1}
 .project-card-img img{
 width:100%;
 height:100%;
 object-fit:cover;
 object-position:center center;
 transition:transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94);
+display:block;
 }
-.project-card:hover .project-card-img img{transform:scale(1.05)}
+.project-card:hover .project-card-img img{transform:scale(1.03)}
 .project-card-info{
-padding-top:20px;
+position:absolute;
+bottom:0;left:0;right:0;
+padding:40px 48px;
+z-index:2;
 display:flex;
 justify-content:space-between;
-align-items:start;
+align-items:end;
 }
 .project-card-info h3{
 font-family:'Space Grotesk',sans-serif;
-font-size:28px;
-font-weight:400;
-color:var(--charcoal);
+font-size:36px;
+font-weight:600;
+color:var(--white);
 letter-spacing:-0.02em;
 }
 .project-card-info .project-meta{
@@ -368,14 +370,19 @@ font-family:'IBM Plex Mono',monospace;
 font-size:10px;
 letter-spacing:0.15em;
 text-transform:uppercase;
-color:var(--steel);
+color:rgba(255,255,255,0.6);
 text-align:right;
 line-height:1.8;
+}
+.carousel-controls{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-top:28px;
 }
 .carousel-nav{
 display:flex;
 gap:12px;
-margin-top:40px;
 }
 .carousel-nav button{
 width:52px;height:52px;
@@ -389,6 +396,16 @@ transition:all 0.3s;
 display:flex;align-items:center;justify-content:center;
 }
 .carousel-nav button:hover{background:var(--charcoal);color:var(--white);border-color:var(--charcoal)}
+.carousel-counter{
+font-family:'IBM Plex Mono',monospace;
+font-size:13px;
+color:var(--steel);
+letter-spacing:0.05em;
+}
+@media(max-width:768px){
+.project-card-info{padding:24px}
+.project-card-info h3{font-size:24px}
+}
 
 /* PROJECT DETAIL OVERLAY */
 .project-overlay{
@@ -1142,7 +1159,6 @@ z-index:0;
 .wizard-step{padding:24px 24px 32px}
 .wizard-progress{padding:0 24px}
 .footer-grid{flex-direction:column;gap:24px}
-.project-card{min-width:100%}
 .project-overlay{padding:16px}
 .project-detail-body{padding:28px}
 .project-detail-body h2{font-size:28px}
@@ -1408,7 +1424,7 @@ z-index:0;
 <div class="bg-num">04</div>
 <div class="reveal" style="position:relative;z-index:1">
 <div class="section-label">04 / Our Work</div>
-<h2>Projects we've<br>engineered.</h2>
+<h2>Projects we've<br>delivered.</h2>
 </div>
 <div class="carousel-viewport reveal" style="position:relative;z-index:1">
 <div class="carousel-track" id="carouselTrack">
@@ -1496,9 +1512,12 @@ z-index:0;
 
 </div>
 </div>
-<div class="carousel-nav reveal" style="position:relative;z-index:1">
+<div class="carousel-controls reveal" style="position:relative;z-index:1">
+<div class="carousel-nav">
 <button id="carouselPrev" aria-label="Previous">&larr;</button>
 <button id="carouselNext" aria-label="Next">&rarr;</button>
+</div>
+<div class="carousel-counter" id="carouselCounter">01 / 08</div>
 </div>
 </div>
 </section>
@@ -1827,14 +1846,17 @@ wizFileInput.dispatchEvent(new Event('change'));
 const track = document.getElementById('carouselTrack');
 const prevBtn = document.getElementById('carouselPrev');
 const nextBtn = document.getElementById('carouselNext');
+const counter = document.getElementById('carouselCounter');
+const totalSlides = track.children.length;
 let carouselPos = 0;
 function updateCarousel() {
-const cardWidth = track.querySelector('.project-card').offsetWidth + 32;
-track.style.transform = 'translateX(' + (-carouselPos * cardWidth) + 'px)';
+track.style.transform = 'translateX(' + (-carouselPos * 100) + '%)';
+const num = String(carouselPos + 1).padStart(2, '0');
+const total = String(totalSlides).padStart(2, '0');
+counter.textContent = num + ' / ' + total;
 }
 nextBtn.addEventListener('click', () => {
-const maxPos = track.children.length - 2;
-if (carouselPos < maxPos) { carouselPos++; updateCarousel(); }
+if (carouselPos < totalSlides - 1) { carouselPos++; updateCarousel(); }
 });
 prevBtn.addEventListener('click', () => {
 if (carouselPos > 0) { carouselPos--; updateCarousel(); }
