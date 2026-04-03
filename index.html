@@ -312,6 +312,9 @@ border-radius:3px;
 overflow:hidden;
 margin-top:56px;
 position:relative;
+margin-left:-56px;
+margin-right:-56px;
+width:calc(100% + 112px);
 }
 .carousel-track{
 display:flex;
@@ -403,8 +406,9 @@ color:var(--steel);
 letter-spacing:0.05em;
 }
 @media(max-width:768px){
-.project-card-info{padding:24px}
-.project-card-info h3{font-size:24px}
+.carousel-viewport{margin-left:-24px;margin-right:-24px;width:calc(100% + 48px)}
+.project-card-info{padding:20px 24px}
+.project-card-info h3{font-size:22px}
 }
 
 /* PROJECT DETAIL OVERLAY */
@@ -1149,8 +1153,10 @@ z-index:0;
 .hero-svg-wrap{display:none}
 .hero .section-label{display:none}
 .pain-cards{grid-template-columns:1fr;gap:20px}
-.step{grid-template-columns:60px 1fr;gap:20px}
-.step .step-num{font-size:32px}
+.step{grid-template-columns:48px 1fr;gap:16px;padding:24px 0}
+.step .step-num{font-size:28px}
+.step h3{font-size:22px;margin-bottom:4px}
+.step p{font-size:14px;line-height:1.6}
 .why-us-grid{grid-template-columns:1fr;gap:40px}
 .stats-row{grid-template-columns:repeat(2,1fr);gap:24px}
 .testimonials{grid-template-columns:1fr;gap:32px}
@@ -1350,6 +1356,17 @@ z-index:0;
 
 <div class="exp-card reveal">
 <div class="exp-card-num">01</div>
+<h3>Scope &amp; Takeoff Review</h3>
+<p>We review your GC's plan set and identify every glass-related detail — curtain walls, storefronts, railings, skylights. You get a clean scope before you even start bidding.</p>
+<div class="exp-tags">
+<span class="exp-tag">Scope Review</span>
+<span class="exp-tag">Plan Analysis</span>
+<span class="exp-tag">Bid Support</span>
+</div>
+</div>
+
+<div class="exp-card reveal">
+<div class="exp-card-num">02</div>
 <h3>Shop Drawings</h3>
 <p>Accurate, code-compliant shop drawings ready for fabrication. We handle the detail coordination so your drawings are right the first time — less rework, faster approvals.</p>
 <div class="exp-tags">
@@ -1360,7 +1377,7 @@ z-index:0;
 </div>
 
 <div class="exp-card reveal">
-<div class="exp-card-num">02</div>
+<div class="exp-card-num">03</div>
 <h3>Engineering Stamps &amp; Submittals</h3>
 <p>California-licensed PE on staff. Full engineering calculations, stamped drawings, and GC-ready submittal packages — handled end to end so you never chase an engineer again.</p>
 <div class="exp-tags">
@@ -1371,24 +1388,13 @@ z-index:0;
 </div>
 
 <div class="exp-card reveal">
-<div class="exp-card-num">03</div>
+<div class="exp-card-num">04</div>
 <h3>Live Project Platform</h3>
 <p>Track every project in one place. See real-time progress, manage revisions, version control your drawings, and collaborate with your team — no more email chains or lost files.</p>
 <div class="exp-tags">
 <span class="exp-tag">Dashboard</span>
 <span class="exp-tag">Revisions</span>
 <span class="exp-tag">Versioning</span>
-</div>
-</div>
-
-<div class="exp-card reveal">
-<div class="exp-card-num">04</div>
-<h3>Scope &amp; Takeoff Review</h3>
-<p>We review your GC's plan set and identify every glass-related detail — curtain walls, storefronts, railings, skylights. You get a clean scope before you even start bidding.</p>
-<div class="exp-tags">
-<span class="exp-tag">Scope Review</span>
-<span class="exp-tag">Plan Analysis</span>
-<span class="exp-tag">Bid Support</span>
 </div>
 </div>
 
