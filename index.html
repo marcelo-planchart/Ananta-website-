@@ -130,17 +130,17 @@ z-index:0;
 content:'';
 position:absolute;
 top:0;left:0;right:0;bottom:0;
-background:linear-gradient(to right,rgba(10,10,10,0.6) 45%,rgba(10,10,10,0.2)),linear-gradient(to top,rgba(10,10,10,0.5),transparent 50%);
+background:linear-gradient(to left,rgba(10,10,10,0.6) 45%,rgba(10,10,10,0.15)),linear-gradient(to top,rgba(10,10,10,0.5),transparent 50%);
 z-index:0;
 }
 .hero .container{position:relative;z-index:1}
 .hero-grid{
-display:grid;
-grid-template-columns:1fr 0.5fr;
-gap:80px;
+display:flex;
+justify-content:flex-end;
 align-items:center;
 width:100%;
 }
+.hero-stagger{max-width:640px}
 .hero-svg-wrap{
 display:none;
 }
@@ -1183,7 +1183,8 @@ background:linear-gradient(to top,var(--charcoal),transparent);
 z-index:0;
 }
 .hero .container{position:relative;z-index:1}
-.hero-grid{display:block;max-width:100%}
+.hero-grid{display:block}
+.hero-stagger{max-width:100%}
 .hero-svg-wrap{display:none}
 .hero .section-label{display:none}
 .pain-cards{grid-template-columns:1fr;gap:20px}
