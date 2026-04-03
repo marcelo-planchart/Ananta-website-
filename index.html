@@ -118,12 +118,27 @@ position:relative;
 background:var(--charcoal);
 overflow:hidden;
 }
+.hero::before{
+content:'';
+position:absolute;
+top:0;left:0;right:0;bottom:0;
+background:url('https://populous.com/uploads/2022/11/Bills_Exterior_NightColor_1920x1080.jpg') center/cover no-repeat;
+opacity:0.35;
+z-index:0;
+}
+.hero::after{
+content:'';
+position:absolute;
+bottom:0;left:0;right:0;
+height:40%;
+background:linear-gradient(to top,var(--charcoal),transparent);
+z-index:0;
+}
+.hero .container{position:relative;z-index:1}
 .hero-grid{
-display:grid;
-grid-template-columns:1fr 0.5fr;
-gap:80px;
-align-items:center;
+display:block;
 width:100%;
+max-width:720px;
 }
 .hero h1{
 font-family:'Space Grotesk',sans-serif;
@@ -136,7 +151,7 @@ margin-bottom:36px;
 }
 .hero-body{
 font-size:18px;
-color:var(--steel);
+color:rgba(255,255,255,0.75);
 line-height:1.7;
 margin-bottom:40px;
 max-width:480px;
@@ -177,10 +192,7 @@ text-transform:uppercase;
 color:rgba(255,255,255,0.3);
 }
 .hero-svg-wrap{
-display:flex;
-align-items:center;
-justify-content:center;
-opacity:1;
+display:none;
 }
 
 /* TRUSTED BY BAR */
@@ -848,10 +860,8 @@ nav{padding:16px 24px}
 .nav-links a:not(.ghost-btn){display:none}
 .container{padding:0 24px}
 section{padding:80px 0}
-.hero{min-height:auto;padding:120px 0 80px}
-.hero-grid{grid-template-columns:1fr;gap:32px}
-.hero-svg-wrap{order:-1;opacity:0.08}
-.hero-svg-wrap svg{max-width:240px}
+.hero{min-height:100vh;padding:0}
+.hero-grid{max-width:100%}
 .pain-cards{grid-template-columns:1fr;gap:20px}
 .step{grid-template-columns:60px 1fr;gap:20px}
 .step .step-num{font-size:32px}
@@ -1043,32 +1053,12 @@ section{padding:80px 0}
 </div>
 </section>
 
-<!-- WHY US -->
-<section class="why-us" id="why-us">
-<div class="container">
-<div class="reveal">
-<div class="section-label">03 / Why Us</div>
-<h2>We're not selling<br>you software.</h2>
-</div>
-<div class="why-us-grid reveal">
-<div class="why-us-text">
-<p>Other companies charge $200 a seat to give you a takeoff tool and leave you to figure it out. We've been doing this for 13 years. We know glass. We know glazing contractors. We know what your GC needs.</p>
-<p>We give you the takeoff free &mdash; because the more projects you win, the more engineering work we do together. Your growth is how we grow.</p>
-</div>
-<div class="pull-quote-wrap">
-<p class="pull-quote">&ldquo;Your empowerment<br>is our growth.&rdquo;</p>
-<div class="pull-quote-attr">Jose Chang &mdash; Founder</div>
-</div>
-</div>
-</div>
-</section>
-
 <!-- PROJECTS CAROUSEL -->
 <section class="projects" id="projects">
 <div class="container">
 <div class="bg-num">04</div>
 <div class="reveal" style="position:relative;z-index:1">
-<div class="section-label">04 / Our Work</div>
+<div class="section-label">03 / Our Work</div>
 <h2>Projects we've<br>engineered.</h2>
 </div>
 <div class="carousel-viewport reveal" style="position:relative;z-index:1">
@@ -1185,7 +1175,7 @@ section{padding:80px 0}
 <section class="social-proof" id="track-record">
 <div class="container">
 <div class="reveal">
-<div class="section-label">05 / Track Record</div>
+<div class="section-label">04 / Track Record</div>
 </div>
 <div class="stats-row reveal">
 <div>
@@ -1225,7 +1215,7 @@ Pacific Glazing &middot; Chosen Glass &middot; All Glass &amp; Aluminum &middot;
 <section class="cta-section" id="start">
 <div class="container">
 <div class="reveal">
-<div class="section-label">06 / Start Here</div>
+<div class="section-label">05 / Start Here</div>
 <h2>Start your next project<br>with us.</h2>
 <p class="subhead">Create your account in seconds. Then walk through a quick project setup — upload docs, tell us what you need, and we'll get your takeoff back within 24 hours.</p>
 </div>
