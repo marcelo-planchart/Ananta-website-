@@ -6,7 +6,7 @@ import { Text } from '@/components/Text';
 import { Card, Row, Screen, SectionLabel, Spacer } from '@/components/primitives';
 import { builtInSequences, sequenceForDay } from '@/data/sequences';
 import type { Sequence } from '@/data/types';
-import { estimateMinutes } from '@/features/practice/resolve';
+import { estimateMinutes, resolveByLength } from '@/features/practice/resolve';
 import { useTotals } from '@/features/progress/store';
 import { useSettings } from '@/features/settings/store';
 import { useCustomSequences } from '@/features/teach/store';
@@ -103,7 +103,9 @@ export default function PracticeHome() {
                   {estimateMinutes(sequence, 'full', settings.pace)} min
                 </Text>
                 <Text variant="label" tone="muted" caps>
-                  {sequence.steps.length} poses
+                  {/* Count the poses you actually do at this length, both sides
+                      and every round included — not the authored step count. */}
+                  {resolveByLength(sequence, 'full', settings.pace).steps.length} poses
                 </Text>
               </View>
             </Row>

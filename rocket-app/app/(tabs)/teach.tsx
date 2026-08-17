@@ -4,7 +4,7 @@ import { Alert, Platform, Pressable, View } from 'react-native';
 
 import { Text } from '@/components/Text';
 import { Button, Card, Row, Screen, SectionLabel, Spacer } from '@/components/primitives';
-import { estimateMinutes } from '@/features/practice/resolve';
+import { estimateMinutes, resolveByLength } from '@/features/practice/resolve';
 import { useSettings } from '@/features/settings/store';
 import { deleteCustomSequence, useCustomSequences } from '@/features/teach/store';
 import { useTheme } from '@/theme';
@@ -63,7 +63,7 @@ export default function Teach() {
                     {sequence.name}
                   </Text>
                   <Text variant="small" tone="muted">
-                    {sequence.steps.length} poses ·{' '}
+                    {resolveByLength(sequence, 'complete', settings.pace).steps.length} poses ·{' '}
                     {estimateMinutes(sequence, 'complete', settings.pace)} min
                   </Text>
                 </Pressable>

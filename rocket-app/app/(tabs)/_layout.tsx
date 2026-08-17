@@ -18,7 +18,9 @@ export default function TabsLayout() {
           borderTopColor: theme.color.line,
           borderTopWidth: StyleSheet.hairlineWidth,
         },
-        tabBarLabelStyle: { fontSize: 11, fontWeight: '600' },
+        // 10pt keeps "Community" from truncating across five tabs on a small phone.
+        tabBarLabelStyle: { fontSize: 10, fontWeight: '600' },
+        tabBarItemStyle: { paddingHorizontal: 2 },
       }}
     >
       <Tabs.Screen

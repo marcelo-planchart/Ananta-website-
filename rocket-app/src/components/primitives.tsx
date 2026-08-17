@@ -31,7 +31,9 @@ export function Screen({
   const theme = useTheme();
   const body = scroll ? (
     <ScrollView
-      contentContainerStyle={[{ padding: theme.space.lg, paddingBottom: theme.space.huge }, contentStyle]}
+      // Extra bottom padding so the last card clears the tab bar, which floats
+      // over the scroll view rather than shortening it.
+      contentContainerStyle={[{ padding: theme.space.lg, paddingBottom: theme.space.huge * 2 }, contentStyle]}
       showsVerticalScrollIndicator={false}
     >
       {children}
