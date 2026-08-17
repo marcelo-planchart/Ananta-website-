@@ -33,7 +33,8 @@
     },
     "web": {
       "bundler": "metro",
-      "output": "static",
+      "_comment": "Single-page output: the web target is a preview surface for a mobile app, and one entry point with client-side routing is what deep links like /sequence/rocket-1 need behind a static host.",
+      "output": "single",
       "favicon": "./assets/favicon.png"
     },
     "plugins": ["expo-router"]
