@@ -9,6 +9,7 @@ full picture; this file is the short version for future sessions.
 npm run typecheck   # tsc --noEmit — must be clean
 npm test            # jest, pure logic only, no native mocks
 npm run export:web  # static build, useful for screenshotting screens
+npm run preview:single  # one self-contained preview.html (no external requests)
 ```
 
 `npx expo install` does not work in the sandboxed environment (api.expo.dev is

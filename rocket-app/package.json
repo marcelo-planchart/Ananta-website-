@@ -37,7 +37,8 @@
     "typecheck": "tsc --noEmit",
     "test": "jest",
     "test:watch": "jest --watch",
-    "export:web": "expo export --platform web"
+    "export:web": "expo export --platform web",
+    "preview:single": "expo export --platform web && node scripts/build-single-file.js preview.html --fragment"
   },
   "private": true
 }

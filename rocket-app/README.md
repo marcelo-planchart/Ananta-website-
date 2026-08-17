@@ -29,6 +29,14 @@ npm test           # 56 tests, no native mocks needed
 npm run export:web # static build in dist/
 ```
 
+To produce a shareable preview, `npm run preview:single` exports the web build
+and folds it into one self-contained `preview.html` — the bundle inlined, plus
+the Ionicons face and navigation images as data URIs. It makes no external
+requests, so it can be opened from a file or served from any path. Useful for
+handing someone a link when they cannot install Expo Go; the native build is
+still the real thing (the web preview has no haptics, and voice cues fall back
+to the browser's speech synthesis).
+
 ---
 
 ## The idea
